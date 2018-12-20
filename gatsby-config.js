@@ -2,8 +2,8 @@ module.exports = {
   siteMetadata: {
     title: '张庆的笔记',
     author: '张庆',
-    description: 'A starter blog demonstrating what Gatsby can do.',
-    siteUrl: 'https://gatsby-starter-blog-demo.netlify.com/',
+    description: '张庆的个人工作笔记 博客 日志 ',
+    siteUrl: 'https://zqblog.beaf.tech/',
   },
   pathPrefix: '/gatsby-starter-blog',
   plugins: [
@@ -54,13 +54,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `张庆的笔记`,
+        short_name: `博客`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/assets/gatsby-icon.png`,
+        icon: `src/assets/beaf.logo.png`,
       },
     },
 //    `gatsby-plugin-offline`,
