@@ -1,11 +1,10 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
-
-import Layout from '../components/Layout'
-import { rhythm } from '../utils/typography'
 import media from 'styled-media-query'
 import styled from 'styled-components'
+import Layout from '../components/Layout'
+import { rhythm } from '../utils/typography'
 import TagList from '../components/TagList'
 
 const PostTitle = styled.h1`
@@ -56,7 +55,6 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = this.props.data.site.siteMetadata.title
     const siteDescription = post.excerpt
     const { previous, next } = this.props.pageContext
-    console.log(post.frontmatter.tags)
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Helmet
@@ -82,7 +80,6 @@ class BlogPostTemplate extends React.Component {
               marginBottom: rhythm(1),
             }}
           />
-          {/*<Bio />*/}
 
           <ul
             style={{
