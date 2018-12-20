@@ -2,9 +2,53 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
-import Bio from '../components/Bio'
 import Layout from '../components/Layout'
-import { rhythm, scale } from '../utils/typography'
+import { rhythm } from '../utils/typography'
+import media from 'styled-media-query'
+import styled from 'styled-components'
+import TagList from '../components/TagList'
+
+const PostTitle = styled.h1`
+  color: #333;
+  line-height: 1em;
+
+  transition: all 0.3s;
+  margin-bottom: ${rhythm(1 / 4)};
+  cursor: default;
+  &:hover {
+    opacity: 0.61;
+  }
+`
+
+const PublishDate = styled.span`
+  font-size: 0.75em;
+  color: #969696;
+  padding-right: 1em;
+  margin-right: 1em;
+  border-right: 1px solid #969696;
+`
+
+const MarkDownContainer = styled.div`
+  margin: 0 auto;
+  padding: ${rhythm(1)};
+  width: 100%;
+
+  ${media.greaterThan('large')`
+      max-width: ${rhythm(38)}
+    `};
+  
+  ${media.between('medium', 'large')`
+  max-width: ${rhythm(26)};
+  `}
+  
+  ${media.between('small', 'medium')`
+    max-width: ${rhythm(20)}
+  `}
+  
+  ${media.lessThan('small')`
+  max-width: ${rhythm(14)}
+  `}
+`
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -12,59 +56,59 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = this.props.data.site.siteMetadata.title
     const siteDescription = post.excerpt
     const { previous, next } = this.props.pageContext
-
+    console.log(post.frontmatter.tags)
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Helmet
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}
           title={`${post.frontmatter.title} | ${siteTitle}`}
-        />
-        <h1>{post.frontmatter.title}</h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: 'block',
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
-          }}
         >
-          {post.frontmatter.date}
-        </p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
-        <Bio />
+          <link
+            rel={'stylesheet'}
+            type={'text/css'}
+            href={'//at.alicdn.com/t/font_585271_6fnuvd8aj0d7k3xr.css'}
+          />
+        </Helmet>
+        <MarkDownContainer
+        >
+          <PostTitle>{post.frontmatter.title}</PostTitle>
+          <PublishDate>{post.frontmatter.date}</PublishDate>
 
-        <ul
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            listStyle: 'none',
-            padding: 0,
-          }}
-        >
-          <li>
-            {
-              previous &&
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            }
-          </li>
-          <li>
-            {
-              next &&
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            }
-          </li>
-        </ul>
+          <TagList tags={post.frontmatter.tags} />
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <hr
+            style={{
+              marginBottom: rhythm(1),
+            }}
+          />
+          {/*<Bio />*/}
+
+          <ul
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              listStyle: 'none',
+              padding: 0,
+            }}
+          >
+            <li>
+              {previous && (
+                <Link to={previous.fields.slug} rel="prev">
+                  ← {previous.frontmatter.title}
+                </Link>
+              )}
+            </li>
+            <li>
+              {next && (
+                <Link to={next.fields.slug} rel="next">
+                  {next.frontmatter.title} →
+                </Link>
+              )}
+            </li>
+          </ul>
+        </MarkDownContainer>
       </Layout>
     )
   }
@@ -87,6 +131,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        tags
       }
     }
   }

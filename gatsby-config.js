@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Starter Blog',
-    author: 'Kyle Mathews',
+    title: '张庆的笔记',
+    author: '张庆',
     description: 'A starter blog demonstrating what Gatsby can do.',
     siteUrl: 'https://gatsby-starter-blog-demo.netlify.com/',
   },
@@ -57,7 +57,7 @@ module.exports = {
         icon: `src/assets/gatsby-icon.png`,
       },
     },
-    `gatsby-plugin-offline`,
+//    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: 'gatsby-plugin-typography',
