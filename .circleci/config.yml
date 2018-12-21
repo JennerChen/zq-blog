@@ -26,10 +26,17 @@ jobs:
 
       # run tests!
       - run: yarn run build
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - public
   deploy:
     machine:
       enabled: true
     steps:
+      - attach_workspace:
+          at: ~/repo
       - add_ssh_keys:
           fingerprints:
            - "d7:97:6e:94:6a:9d:7e:d2:d9:bd:93:ba:48:e4:20:7a"
