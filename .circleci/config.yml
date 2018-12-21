@@ -37,7 +37,7 @@ jobs:
     machine:
       enabled: true
     steps:
-      - run: apt-get update && sudo apt-get install rsync
+      - run: sudo apt-get update && sudo apt-get install rsync
       - attach_workspace:
           at: ~/repo
       - add_ssh_keys:
