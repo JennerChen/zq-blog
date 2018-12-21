@@ -32,8 +32,6 @@ jobs:
 
       - persist_to_workspace:
           root: public
-          paths:
-            - *
 
   deploy:
     machine:
