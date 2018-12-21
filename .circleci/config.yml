@@ -47,7 +47,8 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $BEAF_USER@$BEAF_HOST "cd .. && ls"
+            rsync -va --delete ~/repo/zq-blog/ $BEAF_USER@$BEAF_HOST:/usr/web/zq-blog
+#            ssh $BEAF_USER@$BEAF_HOST "cd .. && ls"
 
 workflows:
   version: 2
