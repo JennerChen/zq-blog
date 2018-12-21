@@ -28,7 +28,7 @@ jobs:
       - run: yarn run build
 
       - persist_to_workspace:
-          root: .
+          root: ~/repo
           paths:
             - public
   deploy:
