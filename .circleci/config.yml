@@ -1,14 +1,11 @@
 version: 2
-
-executors:
-  my-executor:
-    docker:
-      - image: circleci/node
-    working_directory: /tmp
-
 jobs:
   build:
-    executor: my-executor
+    docker:
+
+      - image: circleci/node
+
+    working_directory: ~/repo
 
     steps:
       - checkout
@@ -30,18 +27,21 @@ jobs:
       # run tests!
       - run: yarn run build
 
-      - persist_to_workspace:
-          root: public
+      - run: pwd && ls
 
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - public
   deploy:
     machine:
       enabled: true
     steps:
       - attach_workspace:
-          at: /tmp/public
+          at: ~/repo
       - add_ssh_keys:
           fingerprints:
-           - "d7:97:6e:94:6a:9d:7e:d2:d9:bd:93:ba:48:e4:20:7a"
+            - "d7:97:6e:94:6a:9d:7e:d2:d9:bd:93:ba:48:e4:20:7a"
       - run: ls
       - run:
           name: Deploy Over SSH
@@ -59,4 +59,5 @@ workflows:
           filters:
             branches:
               only: master
+
 
