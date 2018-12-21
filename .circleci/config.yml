@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $BEAF_USER@$BEAF_HOST "ls"
+            ssh $BEAF_USER@$BEAF_HOST "cd .. && ls"
 
 workflows:
   version: 2
