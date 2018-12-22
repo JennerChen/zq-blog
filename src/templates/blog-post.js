@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Layout from '../components/Layout'
 import { rhythm } from '../utils/typography'
 import TagList from '../components/TagList'
-
+import CopyRightInfo from "../components/CopyRightInfo";
 const PostTitle = styled.h1`
   color: #333;
   line-height: 1em;
@@ -54,6 +54,7 @@ class BlogPostTemplate extends React.Component {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
     const siteDescription = post.excerpt
+    const original = post.frontmatter.original;
     const { previous, next } = this.props.pageContext
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -68,13 +69,14 @@ class BlogPostTemplate extends React.Component {
             href={'//at.alicdn.com/t/font_585271_6fnuvd8aj0d7k3xr.css'}
           />
         </Helmet>
-        <MarkDownContainer
-        >
+        <MarkDownContainer>
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <PublishDate>{post.frontmatter.date}</PublishDate>
 
           <TagList tags={post.frontmatter.tags} />
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <CopyRightInfo original={ original }/>
+
           <hr
             style={{
               marginBottom: rhythm(1),
@@ -129,6 +131,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         tags
+        original
       }
     }
   }
