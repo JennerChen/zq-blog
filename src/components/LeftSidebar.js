@@ -90,9 +90,9 @@ export default class extends Component {
 
           {/*<Divider />*/}
 
-          {this.props.tags.map(({ fieldValue, totalCount }) => (
+          {this.props.tags ? this.props.tags.map(({ fieldValue, totalCount }) => (
             <Tag key={fieldValue} label={fieldValue} count={totalCount} />
-          ))}
+          )) : null}
 
           <Divider />
 
