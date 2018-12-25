@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Layout from '../components/Layout'
 import BlogList from '../components/BlogList'
@@ -57,7 +57,34 @@ Tags.propTypes = {
   }),
 }
 
-export default Tags
+export default class extends Component {
+  render(){
+    const { pageContext, data, location } = this.props;
+    const { tag } = pageContext
+    const { edges, totalCount } = data.allMarkdownRemark
+
+    const siteTitle = data.site.siteMetadata.title
+
+    return (
+      <Layout sideBar={false} location={location} title={siteTitle}>
+        <BlogList
+          header={
+            <h1>
+              共找到<HighlightSpan>{totalCount}</HighlightSpan>篇关于主题:
+              <HighlightSpan>{tag}</HighlightSpan> 的文章{' '}
+            </h1>
+          }
+          posts={edges}
+        />
+        {/*
+              This links to a page that does not yet exist.
+              We'll come back to it!
+            */}
+        {/*<Link to="/tags">All tags</Link>*/}
+      </Layout>
+    )
+  }
+}
 
 export const pageQuery = graphql`
   query($tag: String) {

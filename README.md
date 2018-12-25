@@ -1,7 +1,6 @@
-# gatsby-starter-blog
-Gatsby starter for creating a blog
+[![CircleCI](https://circleci.com/gh/JennerChen/zq-blog.svg?style=svg)](https://circleci.com/gh/JennerChen/zq-blog)
 
-Install this starter (assuming Gatsby is installed) by running from your CLI:
+我的个人博客, 基于 `gatsby-starter-blog`
 
 `gatsby new gatsby-blog https://github.com/gatsbyjs/gatsby-starter-blog`
 
