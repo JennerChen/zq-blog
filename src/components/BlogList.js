@@ -6,6 +6,7 @@ import { Component } from 'react'
 import TagList from './TagList'
 import PostNavButton from './PostNavButton'
 import React from 'react'
+import { CommentCount } from '../components/Disqus'
 
 const PostTitle = styled.h3`
   color: #333;
@@ -60,15 +61,26 @@ const HomeNotesListContainer = styled.div.attrs({
   `}
 `
 
+const CommentCountLink = styled(CommentCount)`
+  font-size: 0.75em;
+  padding-right: 1em;
+  margin-right: 1em;
+  box-shadow: none;
+`
+
 class PostBrief extends Component {
+
   render() {
     const {
       node: {
         excerpt,
         fields: { slug },
-        frontmatter: { date, title, tags },
+        frontmatter: { date, title, tags, commentIdentifier },
       },
     } = this.props
+
+    const identifier = commentIdentifier ? commentIdentifier : title
+
     return (
       <PostContainer>
         <PostTitle>
@@ -76,7 +88,17 @@ class PostBrief extends Component {
             {title}
           </Link>
         </PostTitle>
-        <PublishDate>{date}</PublishDate> <TagList tags={tags} />
+        <PublishDate>{date}</PublishDate>
+        <CommentCountLink
+          shortname={'zqblog-1'}
+          config={{
+            identifier,
+            url: slug + '#disqus_thread',
+            title: title,
+          }}
+        />
+        <div style={{ height: rhythm(0.3) }} />
+        <TagList tags={tags} />
         <PostContent dangerouslySetInnerHTML={{ __html: excerpt }} />
         <div>
           <PostNavButton onClick={() => navigate(slug)}>阅读</PostNavButton>

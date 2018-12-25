@@ -6,7 +6,8 @@ import styled from 'styled-components'
 import Layout from '../components/Layout'
 import { rhythm } from '../utils/typography'
 import TagList from '../components/TagList'
-import CopyRightInfo from "../components/CopyRightInfo";
+import CopyRightInfo from '../components/CopyRightInfo'
+import { DiscussionEmbed } from '../components/Disqus'
 const PostTitle = styled.h1`
   color: #333;
   line-height: 1em;
@@ -33,35 +34,44 @@ const MarkDownContainer = styled.div`
   width: 100%;
 
   ${media.greaterThan('large')`
-      max-width: ${rhythm(38)}
+      max-width: ${rhythm(38)};
+      padding: ${rhythm(1)};
     `};
   
   ${media.between('medium', 'large')`
   max-width: ${rhythm(26)};
+  padding: ${rhythm(0.8)};
   `}
   
   ${media.between('small', 'medium')`
-    max-width: ${rhythm(20)}
+    max-width: ${rhythm(20)};
+      padding: ${rhythm(0.6)};
+
   `}
   
   ${media.lessThan('small')`
-  max-width: ${rhythm(14)}
+  max-width: ${rhythm(14)};
+  padding: ${rhythm(0.4)};
   `}
 `
-
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
     const siteDescription = post.excerpt
-    const original = post.frontmatter.original;
+    const original = post.frontmatter.original
     const { previous, next } = this.props.pageContext
+    const title = `${post.frontmatter.title} | ${siteTitle}`
+    const identifier = post.frontmatter.commentIdentifier
+      ? post.frontmatter.commentIdentifier
+      : post.frontmatter.title
+
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Helmet
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}
-          title={`${post.frontmatter.title} | ${siteTitle}`}
+          title={title}
         >
           <link
             rel={'stylesheet'}
@@ -75,11 +85,11 @@ class BlogPostTemplate extends React.Component {
 
           <TagList tags={post.frontmatter.tags} />
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
-          <CopyRightInfo original={ original }/>
+          <CopyRightInfo original={original} />
 
           <hr
             style={{
-              marginBottom: rhythm(1),
+              marginBottom: rhythm(.5),
             }}
           />
 
@@ -90,6 +100,7 @@ class BlogPostTemplate extends React.Component {
               justifyContent: 'space-between',
               listStyle: 'none',
               padding: 0,
+              marginLeft: 0
             }}
           >
             <li>
@@ -107,6 +118,20 @@ class BlogPostTemplate extends React.Component {
               )}
             </li>
           </ul>
+
+          <hr
+            style={{
+              marginTop: rhythm(.5),
+            }}
+          />
+
+          <DiscussionEmbed
+            shortname={'zqblog-1'}
+            config={{
+              identifier,
+              title,
+            }}
+          />
         </MarkDownContainer>
       </Layout>
     )
@@ -132,6 +157,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         tags
         original
+        commentIdentifier
       }
     }
   }
