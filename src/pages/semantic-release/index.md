@@ -1,7 +1,7 @@
 ---
 title: semantic-release 集成
 date: '2018-12-20'
-tags: npm|CI|DevOps
+tags: [npm,CI,DevOps]
 ---
 
 ## 背景

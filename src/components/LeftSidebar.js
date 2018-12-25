@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import { rhythm, scale } from '../utils/typography'
 import media from 'styled-media-query'
+import Tag from './Tag'
 
 const Container = styled.div`
   display: flex;
@@ -75,7 +76,7 @@ export default class extends Component {
     return (
       <Container>
         <StickWrap>
-          <MyName>张庆</MyName>
+          <MyName>Zhang Qing</MyName>
           <Desc>
             Hi, 我是张庆。一名前端程序员, 这是我记录工作中的笔记📒,
             主要为前端技术问题。不求精品, 只求实用
@@ -86,6 +87,12 @@ export default class extends Component {
           <div>
             <StyledLink to={'/'}>主页</StyledLink>
           </div>
+
+          {/*<Divider />*/}
+
+          {this.props.tags.map(({ fieldValue, totalCount }) => (
+            <Tag key={fieldValue} label={fieldValue} count={totalCount} />
+          ))}
 
           <Divider />
 

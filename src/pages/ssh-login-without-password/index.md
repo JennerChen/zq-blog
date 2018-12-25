@@ -1,7 +1,7 @@
 ---
 title: SSH登录不用密码
 date: '2018-12-21'
-tags: linux
+tags: [linux]
 original: 'http://www.linuxproblem.org/art_9.html'
 ---
 

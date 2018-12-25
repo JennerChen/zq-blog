@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
-
+//import Tag from "./Tag";
 export const Tag = styled.div`
   background: #eee;
   border-radius: 3px 0 0 3px;
@@ -50,16 +50,7 @@ export const Tag = styled.div`
 export default class extends Component {
   render() {
     const { tags } = this.props
-    if (!tags) return null
-    const tagArr = []
-    if (typeof tags === 'string') {
-      tags.split('|').forEach(tag => {
-        if (!tagArr.includes(tag)) {
-          tagArr.push(tag)
-        }
-      })
-    }
-    if (tagArr.length === 0) return null
-    return tagArr.map(tag => <Tag key={tag}>{tag}</Tag>)
+    if (tags.length === 0) return null
+    return tags.map(tag => <Tag key={tag}>{tag}</Tag>)
   }
 }

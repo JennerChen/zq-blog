@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
 
 class Layout extends React.Component {
   render() {
-    const { location, title, children } = this.props
+    const { location, title, children, tags, sideBar } = this.props
     //    const rootPath = `${__PATH_PREFIX__}/`
     //    let header
 
@@ -48,12 +48,16 @@ class Layout extends React.Component {
         <GlobalStyle />
         <GlobalTheme />
         <Flex style={{ minHeight: '100%' }}>
-          <LeftSidebar />
+          { sideBar ? <LeftSidebar tags={ tags }/> : null }
           <Content>{children}</Content>
         </Flex>
       </Fragment>
     )
   }
+}
+
+Layout.defaultProps = {
+  sideBar: true
 }
 
 export default Layout

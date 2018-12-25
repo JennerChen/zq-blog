@@ -11,7 +11,9 @@ class BlogIndex extends React.Component {
     const siteDescription = data.site.siteMetadata.description
     const posts = data.allMarkdownRemark.edges
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout
+        tags={this.props.data.allMarkdownRemark.group}
+        location={this.props.location} title={siteTitle}>
         <Helmet
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}
@@ -40,6 +42,7 @@ export const pageQuery = graphql`
         description
       }
     }
+
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
@@ -54,6 +57,11 @@ export const pageQuery = graphql`
             commentIdentifier
           }
         }
+      }
+
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
       }
     }
   }

@@ -6,6 +6,7 @@ import { Component } from 'react'
 import TagList from './TagList'
 import PostNavButton from './PostNavButton'
 import React from 'react'
+import Tag from '../components/Tag'
 import { CommentCount } from '../components/Disqus'
 
 const PostTitle = styled.h3`
@@ -69,7 +70,6 @@ const CommentCountLink = styled(CommentCount)`
 `
 
 class PostBrief extends Component {
-
   render() {
     const {
       node: {
@@ -98,7 +98,10 @@ class PostBrief extends Component {
           }}
         />
         <div style={{ height: rhythm(0.3) }} />
-        <TagList tags={tags} />
+        {tags.map(tag => (
+          <Tag key={tag} label={tag} />
+        ))}
+        {/*<TagList tags={tags} />*/}
         <PostContent dangerouslySetInnerHTML={{ __html: excerpt }} />
         <div>
           <PostNavButton onClick={() => navigate(slug)}>阅读</PostNavButton>
@@ -112,6 +115,7 @@ export default class extends Component {
   render() {
     return (
       <HomeNotesListContainer>
+        { this.props.header }
         {this.props.posts.map(({ node }) => {
           return <PostBrief key={node.fields.slug} node={node} />
         })}

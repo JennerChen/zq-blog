@@ -2,7 +2,7 @@
 title: Css in Js 之 styled-components
 commentIdentifier: Css in Js 之 styled-components
 date: '2018-12-13T23:46:37.121Z'
-tags: css
+tags: ["css"]
 ---
 
 ## 背景1

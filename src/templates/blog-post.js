@@ -8,6 +8,7 @@ import { rhythm } from '../utils/typography'
 import TagList from '../components/TagList'
 import CopyRightInfo from '../components/CopyRightInfo'
 import { DiscussionEmbed } from '../components/Disqus'
+import Tag from '../components/Tag'
 const PostTitle = styled.h1`
   color: #333;
   line-height: 1em;
@@ -67,7 +68,11 @@ class BlogPostTemplate extends React.Component {
       : post.frontmatter.title
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout
+        tags={this.props.data.allMarkdownRemark.group}
+        location={this.props.location}
+        title={siteTitle}
+      >
         <Helmet
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}
@@ -83,13 +88,16 @@ class BlogPostTemplate extends React.Component {
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <PublishDate>{post.frontmatter.date}</PublishDate>
 
-          <TagList tags={post.frontmatter.tags} />
+          {post.frontmatter.tags.map(tag => (
+            <Tag key={tag} label={tag} />
+          ))}
+          {/*<TagList tags={post.frontmatter.tags} />*/}
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           <CopyRightInfo original={original} />
 
           <hr
             style={{
-              marginBottom: rhythm(.5),
+              marginBottom: rhythm(0.5),
             }}
           />
 
@@ -100,7 +108,7 @@ class BlogPostTemplate extends React.Component {
               justifyContent: 'space-between',
               listStyle: 'none',
               padding: 0,
-              marginLeft: 0
+              marginLeft: 0,
             }}
           >
             <li>
@@ -121,7 +129,7 @@ class BlogPostTemplate extends React.Component {
 
           <hr
             style={{
-              marginTop: rhythm(.5),
+              marginTop: rhythm(0.5),
             }}
           />
 
@@ -148,6 +156,14 @@ export const pageQuery = graphql`
         author
       }
     }
+
+    allMarkdownRemark(limit: 2000) {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
+    }
+
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       excerpt
