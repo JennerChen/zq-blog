@@ -73,6 +73,11 @@ const IconButton = styled.a`
 
 export default class extends Component {
   render() {
+    let tags = (this.props.tags ? this.props.tags : []).sort((a, b) => {
+      if (a.totalCount - b.totalCount === 0) return 0
+      return a.totalCount - b.totalCount > 0 ? -1 : 1
+    })
+
     return (
       <Container>
         <StickWrap>
@@ -90,9 +95,17 @@ export default class extends Component {
 
           {/*<Divider />*/}
 
-          {this.props.tags ? this.props.tags.map(({ fieldValue, totalCount }) => (
-            <Tag key={fieldValue} label={fieldValue} count={totalCount} />
-          )) : null}
+          <div style={ { marginTop: ".6em" } }>
+            {/*最多只显示20个*/}
+            {tags.slice(0,20).map(({ fieldValue, totalCount }) => (
+              <Tag
+                alwaysShow={true}
+                key={fieldValue}
+                label={fieldValue}
+                count={totalCount}
+              />
+            ))}
+          </div>
 
           <Divider />
 

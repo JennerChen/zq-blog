@@ -5,7 +5,7 @@ module.exports = {
     description: '张庆的个人工作笔记 博客 日志 ',
     siteUrl: 'https://zqblog.beaf.tech/',
   },
-  pathPrefix: '/gatsby-starter-blog',
+  pathPrefix: '/',
   plugins: [
     {
       resolve: `gatsby-plugin-styled-components`,
