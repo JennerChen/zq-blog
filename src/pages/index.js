@@ -12,8 +12,12 @@ class BlogIndex extends React.Component {
     const posts = data.allMarkdownRemark.edges
     return (
       <Layout
-        tags={this.props.data.allMarkdownRemark.group}
-        location={this.props.location} title={siteTitle}>
+        tags={this.props.data.allMarkdownRemark.group.sort(
+          (a, b) => a.totalCount - b.totalCount > 0
+        )}
+        location={this.props.location}
+        title={siteTitle}
+      >
         <Helmet
           htmlAttributes={{ lang: 'en' }}
           meta={[{ name: 'description', content: siteDescription }]}

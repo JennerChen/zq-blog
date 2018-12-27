@@ -5,7 +5,7 @@ date: '2018-12-13T23:46:37.121Z'
 tags: ["css"]
 ---
 
-## 背景1
+## 背景
 
 [css-in-js](https://speakerdeck.com/vjeux/react-css-in-js) 在 react 中非常流行, 本文主要介绍如下几种，基本能覆盖当前前端环境下主流 css-in-js 方案
 
