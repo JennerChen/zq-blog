@@ -13,6 +13,7 @@ const Button = styled.button`
   outline: none;
   font-size: 1em;
   color: #969696;
+  background-color: transparent;
   
   &:hover {
     border-color: #969696;
