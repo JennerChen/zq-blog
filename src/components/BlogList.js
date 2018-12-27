@@ -29,7 +29,7 @@ const PublishDate = styled.span`
 `
 
 const PostContainer = styled.div`
-  padding-bottom: ${rhythm(20 / 16)};
+  padding-bottom: ${rhythm(10 / 16)};
   border-bottom: 1px solid #d4d4d4;
 `
 
