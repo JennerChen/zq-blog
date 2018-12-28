@@ -93,7 +93,7 @@ class BlogPostTemplate extends React.Component {
         <MarkDownContainer>
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <PublishDate>{post.frontmatter.date}</PublishDate>
-          <ReadingTimeEst>约{ post.timeToRead }分钟阅读</ReadingTimeEst>
+          <ReadingTimeEst>约{post.timeToRead}分钟阅读</ReadingTimeEst>
 
           {post.frontmatter.tags.map(tag => (
             <Tag key={tag} label={tag} />
@@ -174,7 +174,7 @@ export const pageQuery = graphql`
       id
       excerpt
       html
-        timeToRead
+      timeToRead
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
