@@ -132,7 +132,11 @@ export default class extends Component {
 
     return (
       <TagContainer className={alwaysShow ? 'alwaysShow' : ''} style={style}>
-        <TagContainerLabel count={count} to={`/tags/${kebabCase(label)}/`}>
+        <TagContainerLabel
+          title={`点击查看所有关于${label}的笔记`}
+          count={count}
+          to={`/tags/${kebabCase(label)}/`}
+        >
           {label}
         </TagContainerLabel>
         {count ? (

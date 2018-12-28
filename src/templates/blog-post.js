@@ -5,7 +5,6 @@ import media from 'styled-media-query'
 import styled from 'styled-components'
 import Layout from '../components/Layout'
 import { rhythm } from '../utils/typography'
-import TagList from '../components/TagList'
 import CopyRightInfo from '../components/CopyRightInfo'
 import { DiscussionEmbed } from '../components/Disqus'
 import Tag from '../components/Tag'
@@ -22,6 +21,14 @@ const PostTitle = styled.h1`
 `
 
 const PublishDate = styled.span`
+  font-size: 0.75em;
+  color: #969696;
+  padding-right: 1em;
+  margin-right: 1em;
+  border-right: 1px solid #969696;
+`
+
+const ReadingTimeEst = styled.span`
   font-size: 0.75em;
   color: #969696;
   padding-right: 1em;
@@ -66,7 +73,6 @@ class BlogPostTemplate extends React.Component {
     const identifier = post.frontmatter.commentIdentifier
       ? post.frontmatter.commentIdentifier
       : post.frontmatter.title
-
     return (
       <Layout
         tags={this.props.data.allMarkdownRemark.group}
@@ -87,11 +93,11 @@ class BlogPostTemplate extends React.Component {
         <MarkDownContainer>
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <PublishDate>{post.frontmatter.date}</PublishDate>
+          <ReadingTimeEst>约{ post.timeToRead }分钟阅读</ReadingTimeEst>
 
           {post.frontmatter.tags.map(tag => (
             <Tag key={tag} label={tag} />
           ))}
-          {/*<TagList tags={post.frontmatter.tags} />*/}
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           <CopyRightInfo original={original} />
 
@@ -168,6 +174,7 @@ export const pageQuery = graphql`
       id
       excerpt
       html
+        timeToRead
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

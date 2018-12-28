@@ -28,6 +28,14 @@ const PublishDate = styled.span`
   border-right: 1px solid #969696;
 `
 
+const ReadingTimeEst = styled.span`
+  font-size: 0.75em;
+  color: #969696;
+  padding-right: 1em;
+  margin-right: 1em;
+  border-right: 1px solid #969696;
+`
+
 const PostContainer = styled.div`
   padding-bottom: ${rhythm(10 / 16)};
   border-bottom: 1px solid #d4d4d4;
@@ -38,7 +46,7 @@ const PostContent = styled.p`
   font-size: 1em;
   position: relative;
   overflow: hidden;
-  &::after{
+  &::after {
     content: '';
     position: absolute;
     top: 0;
@@ -85,6 +93,7 @@ class PostBrief extends Component {
     const {
       node: {
         excerpt,
+        timeToRead,
         fields: { slug },
         frontmatter: { date, title, tags, commentIdentifier },
       },
@@ -100,6 +109,7 @@ class PostBrief extends Component {
           </Link>
         </PostTitle>
         <PublishDate>{date}</PublishDate>
+        <ReadingTimeEst>约{timeToRead}分钟阅读</ReadingTimeEst>
         <CommentCountLink
           shortname={'zqblog-1'}
           config={{
@@ -126,7 +136,7 @@ export default class extends Component {
   render() {
     return (
       <HomeNotesListContainer>
-        { this.props.header }
+        {this.props.header}
         {this.props.posts.map(({ node }) => {
           return <PostBrief key={node.fields.slug} node={node} />
         })}
