@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import BlogList from '../components/BlogList'
 import Layout from '../components/Layout'
-
+import SearchPost from '../components/SearchPost'
 class BlogIndex extends React.Component {
   render() {
     const { data } = this.props
@@ -30,7 +30,7 @@ class BlogIndex extends React.Component {
           />
         </Helmet>
 
-        <BlogList posts={posts} />
+        <BlogList header={<SearchPost />} posts={posts} />
       </Layout>
     )
   }

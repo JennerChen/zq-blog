@@ -3,7 +3,6 @@ import media from 'styled-media-query'
 import { Link, navigate } from 'gatsby'
 import { rhythm } from '../utils/typography'
 import { Component } from 'react'
-import TagList from './TagList'
 import PostNavButton from './PostNavButton'
 import React from 'react'
 import Tag from '../components/Tag'
@@ -63,7 +62,7 @@ const HomeNotesListContainer = styled.div.attrs({
   margin: 0 auto;
   padding: ${rhythm(1)};
   width: 100%;
-
+  position: relative;
   ${media.greaterThan('large')`
       max-width: ${rhythm(38)}
     `};
