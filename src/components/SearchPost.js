@@ -95,7 +95,7 @@ class BoxInner extends Component {
 
   closePopLayer = ({ target }) => {
     if (this.container.current.contains(target)) {
-      console.log(22)
+
     } else {
       this.setState({
         overlay: false,
@@ -128,7 +128,6 @@ class BoxInner extends Component {
 
   render() {
     const { query, results, overlay } = this.state
-    console.log(results)
     return (
       <SearchBox ref={this.container}>
         <SearchIcon>
