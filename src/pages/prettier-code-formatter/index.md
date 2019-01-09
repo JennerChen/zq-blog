@@ -8,7 +8,7 @@ tags: ['format', 'lint']
 
 这是我安装 `prettier`, `husky`, `lint-staged`的过程, 目标自动格式化代码,统一团队开发规范
 
-> 安装版本为: `prettier`(v1.15.3), `husky`(v1.3.1), `lint-staged`(v8.1.0)，webstorm(2018.3.2)不同版本也许会不一致
+> 安装版本为: `prettier`(v1.15.3), `husky`(v1.3.1), `lint-staged`(v8.1.0)，`webstorm`(2018.3.2)不同版本也许会不一致
 
 ## 安装 prettier
 
@@ -34,8 +34,8 @@ yarn add prettier --dev
 
 ## 安装 husk, lint-staged
 
-```
-yarn add husky lint-stage --dev
+```bash
+yarn add husky lint-staged --dev
 ```
 
 然后在`package.json`中添加
