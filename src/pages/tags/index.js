@@ -8,8 +8,6 @@ import kebabCase from 'lodash/kebabCase'
 import { Helmet } from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
-import Tag from "../../components/Tag";
-
 const TagsPage = ({
   data: {
     allMarkdownRemark: { group },

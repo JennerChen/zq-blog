@@ -37,7 +37,7 @@ require('@babel/register')({
     [
       '@babel/plugin-proposal-decorators',
       {
-        legacy: true, // 必须这样设置, 否则装饰器会有一些限制
+        legacy: true, // 必须这样设置, 否则装饰器会有一些限制, see https://babeljs.io/docs/en/babel-plugin-proposal-decorators#legacy
       },
     ],
   ],

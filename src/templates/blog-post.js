@@ -1,5 +1,4 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import media from 'styled-media-query'
 import styled from 'styled-components'
@@ -65,8 +64,8 @@ const MarkDownContainer = styled.div`
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
-    const siteTitle = this.props.data.site.siteMetadata.title
-    const siteDescription = post.excerpt
+    const siteMetadata = this.props.data.site.siteMetadata
+    const siteTitle = siteMetadata.title
     const original = post.frontmatter.original
     const { previous, next } = this.props.pageContext
     const title = `${post.frontmatter.title} | ${siteTitle}`
@@ -77,19 +76,14 @@ class BlogPostTemplate extends React.Component {
       <Layout
         tags={this.props.data.allMarkdownRemark.group}
         location={this.props.location}
-        title={siteTitle}
+        title={title}
+        meta={[
+          { name: 'description', content: siteMetadata.title },
+          { name: 'description', content: siteMetadata.description },
+          { name: 'description', content: post.frontmatter.tags.join(' ') },
+          { name: 'description', content: post.excerpt },
+        ]}
       >
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          meta={[{ name: 'description', content: siteDescription }]}
-          title={title}
-        >
-          <link
-            rel={'stylesheet'}
-            type={'text/css'}
-            href={'//at.alicdn.com/t/font_585271_6fnuvd8aj0d7k3xr.css'}
-          />
-        </Helmet>
         <MarkDownContainer>
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <PublishDate>{post.frontmatter.date}</PublishDate>
@@ -101,11 +95,7 @@ class BlogPostTemplate extends React.Component {
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           <CopyRightInfo original={original} />
 
-          <hr
-            style={{
-              marginBottom: rhythm(0.5),
-            }}
-          />
+          <hr style={{ marginBottom: rhythm(0.5) }} />
 
           <ul
             style={{
@@ -133,18 +123,11 @@ class BlogPostTemplate extends React.Component {
             </li>
           </ul>
 
-          <hr
-            style={{
-              marginTop: rhythm(0.5),
-            }}
-          />
+          <hr style={{ marginTop: rhythm(0.5) }} />
 
           <DiscussionEmbed
             shortname={'zqblog-1'}
-            config={{
-              identifier,
-              title,
-            }}
+            config={{ identifier, title }}
           />
         </MarkDownContainer>
       </Layout>
@@ -160,6 +143,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        description
       }
     }
 

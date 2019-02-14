@@ -17,19 +17,13 @@ class BlogIndex extends React.Component {
         )}
         location={this.props.location}
         title={siteTitle}
+        meta={[
+          {
+            name: 'description',
+            content: siteDescription,
+          },
+        ]}
       >
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          meta={[{ name: 'description', content: siteDescription }]}
-          title={siteTitle}
-        >
-          <link
-            rel={'stylesheet'}
-            type={'text/css'}
-            href={'//at.alicdn.com/t/font_585271_6fnuvd8aj0d7k3xr.css'}
-          />
-        </Helmet>
-
         <BlogList header={<SearchPost />} posts={posts} />
       </Layout>
     )

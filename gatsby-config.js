@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: '张庆的笔记',
     author: '张庆',
-    description: '张庆的个人工作笔记 博客 日志 ',
+    description: '张庆 笔记 个人工作 张庆的个人工作笔记 博客 日志 技术 前端',
     siteUrl: 'https://zqblog.beaf.tech/',
   },
   pathPrefix: '/',
