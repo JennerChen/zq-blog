@@ -89,9 +89,12 @@ class BlogPostTemplate extends React.Component {
       localStorage.getItem('theme') &&
       localStorage.getItem('theme') !== this.state.mode
     ) {
-      this.setState({
-        mode: localStorage.getItem('theme'),
-      })
+      // 我们需要 delay 一下,
+      setTimeout(() => {
+        this.setState({
+          mode: localStorage.getItem('theme'),
+        })
+      }, 300)
     }
   }
 
