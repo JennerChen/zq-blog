@@ -7,23 +7,8 @@ const Container = styled.div`
   width: 7.5rem;
   height: 4rem;
   transform: scale(0.5);
-  & label {
-    cursor: pointer;
-  }
+  cursor: pointer;
 `
-
-const Input = styled.input.attrs({
-  className: 'toggle-switch',
-  type: 'checkbox',
-  id: 'toggle',
-})`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  opacity: 0;
-`
-
 const Stars = styled.div`
   position: absolute;
   height: 0.4rem;
@@ -186,32 +171,18 @@ const ContainerBg = styled.div`
 `
 
 export default class DayNightSwitch extends React.Component {
-  constructor(props) {
-    super(props)
-    this.inputId = 'toggle___' + Math.random()
-  }
-
   render() {
     const { checked, onChange } = this.props
     const className = checked ? `light-mode` : `dark-mode`
     return (
-      <Container>
-        <label htmlFor={this.inputId}>
-          <Input
-            id={this.inputId}
-            checked={checked}
-            onChange={({ target: { checked } }) => {
-              onChange(checked)
-            }}
-          />
-          <SunMoon className={className}>
-            <div className="dots" />
-          </SunMoon>
-          <ContainerBg className={`background ${className}`}>
-            <Star1/>
-            <Star2/>
-          </ContainerBg>
-        </label>
+      <Container onClick={() => onChange(!checked)}>
+        <SunMoon className={className}>
+          <div className="dots" />
+        </SunMoon>
+        <ContainerBg className={`background ${className}`}>
+          <Star1 />
+          <Star2 />
+        </ContainerBg>
       </Container>
     )
   }
