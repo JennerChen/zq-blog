@@ -1,19 +1,25 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import media from 'styled-media-query'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { switchProp } from 'styled-tools'
 import Layout from '../components/Layout'
 import { rhythm } from '../utils/typography'
 import CopyRightInfo from '../components/CopyRightInfo'
 import { DiscussionEmbed } from '../components/Disqus'
 import Tag from '../components/Tag'
+import DayNightSwitch from '../components/DayNightSwitch'
 const PostTitle = styled.h1`
-  color: #333;
   line-height: 1em;
-
   transition: all 0.3s;
   margin-bottom: ${rhythm(1 / 4)};
+  margin-top: 0;
   cursor: default;
+  ${switchProp('theme.mode', {
+    light: css`
+      color: #333;
+    `,
+  })};
   &:hover {
     opacity: 0.61;
   }
@@ -62,6 +68,17 @@ const MarkDownContainer = styled.div`
   `}
 `
 class BlogPostTemplate extends React.Component {
+  state = {
+    mode: localStorage.getItem('theme')
+      ? localStorage.getItem('theme')
+      : 'light',
+  }
+
+  toggleDarkMode = bool => {
+    localStorage.setItem('theme', bool ? 'light' : 'dark')
+    this.setState({ mode: bool ? 'light' : 'dark' })
+  }
+
   render() {
     const post = this.props.data.markdownRemark
     const siteMetadata = this.props.data.site.siteMetadata
@@ -83,7 +100,14 @@ class BlogPostTemplate extends React.Component {
           { name: 'description', content: post.frontmatter.tags.join(' ') },
           { name: 'description', content: post.excerpt },
         ]}
+        theme={this.state.mode}
       >
+        <div>
+          <DayNightSwitch
+            checked={this.state.mode === 'light'}
+            onChange={val => this.toggleDarkMode(val)}
+          />
+        </div>
         <MarkDownContainer>
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <PublishDate>{post.frontmatter.date}</PublishDate>

@@ -58,8 +58,8 @@ Tags.propTypes = {
 }
 
 export default class extends Component {
-  render(){
-    const { pageContext, data, location } = this.props;
+  render() {
+    const { pageContext, data, location } = this.props
     const { tag } = pageContext
     const { edges, totalCount } = data.allMarkdownRemark
 
@@ -76,11 +76,6 @@ export default class extends Component {
           }
           posts={edges}
         />
-        {/*
-              This links to a page that does not yet exist.
-              We'll come back to it!
-            */}
-        {/*<Link to="/tags">All tags</Link>*/}
       </Layout>
     )
   }
@@ -106,7 +101,7 @@ export const pageQuery = graphql`
           fields {
             slug
           }
-            timeToRead
+          timeToRead
           frontmatter {
             date(formatString: "YYYY-MM-DD")
             title
