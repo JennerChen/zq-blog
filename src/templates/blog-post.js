@@ -68,10 +68,20 @@ const MarkDownContainer = styled.div`
   `}
 `
 class BlogPostTemplate extends React.Component {
-  state = {
-    mode: localStorage.getItem('theme')
-      ? localStorage.getItem('theme')
-      : 'light',
+  constructor(props) {
+    super(props)
+    if (typeof localStorage === 'undefined') {
+      // build 环境, 我们只构建 light模式，dark模式服务器端判定
+      this.state = {
+        mode: 'light',
+      }
+    } else {
+      this.state = {
+        mode: localStorage.getItem('theme')
+          ? localStorage.getItem('theme')
+          : 'light',
+      }
+    }
   }
 
   toggleDarkMode = bool => {
