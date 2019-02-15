@@ -84,6 +84,17 @@ class BlogPostTemplate extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (
+      localStorage.getItem('theme') &&
+      localStorage.getItem('theme') !== this.state.mode
+    ) {
+      this.setState({
+        mode: localStorage.getItem('theme'),
+      })
+    }
+  }
+
   toggleDarkMode = bool => {
     localStorage.setItem('theme', bool ? 'light' : 'dark')
     this.setState({ mode: bool ? 'light' : 'dark' })
