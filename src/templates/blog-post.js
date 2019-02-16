@@ -68,35 +68,20 @@ const MarkDownContainer = styled.div`
   `}
 `
 class BlogPostTemplate extends React.Component {
-  constructor(props) {
-    super(props)
-    if (typeof localStorage === 'undefined') {
-      // build 环境, 我们只构建 light模式，dark模式服务器端判定
-      this.state = {
-        mode: 'light',
-      }
-    } else {
-      this.state = {
-        mode: localStorage.getItem('theme')
-          ? localStorage.getItem('theme')
-          : 'light',
-      }
-    }
+
+  state = {
+    mode: 'light',
   }
 
   componentDidMount() {
-    console.log("it called")
+    // ssr 不会执行
     if (
       localStorage.getItem('theme') &&
       localStorage.getItem('theme') !== this.state.mode
     ) {
-      // 我们需要 delay 一下,
-      setTimeout(() => {
-        this.setState({
-          mode: localStorage.getItem('theme'),
-        })
-        console.log('it works')
-      }, 3000)
+      this.setState({
+        mode: localStorage.getItem('theme'),
+      })
     }
   }
 
