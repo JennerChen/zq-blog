@@ -94,6 +94,7 @@ class BlogPostTemplate extends React.Component {
         this.setState({
           mode: localStorage.getItem('theme'),
         })
+        console.log('it works')
       }, 3000)
     }
   }
