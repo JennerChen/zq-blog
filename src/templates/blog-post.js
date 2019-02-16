@@ -85,6 +85,7 @@ class BlogPostTemplate extends React.Component {
   }
 
   componentDidMount() {
+    console.log("it called")
     if (
       localStorage.getItem('theme') &&
       localStorage.getItem('theme') !== this.state.mode
