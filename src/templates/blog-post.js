@@ -79,6 +79,7 @@ class BlogPostTemplate extends React.Component {
       localStorage.getItem('theme') &&
       localStorage.getItem('theme') !== this.state.mode
     ) {
+      console.log(`use theme ${ this.state.mode }`)
       this.setState({
         mode: localStorage.getItem('theme'),
       })
