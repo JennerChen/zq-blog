@@ -67,6 +67,13 @@ const MarkDownContainer = styled.div`
   padding: ${rhythm(0.4)};
   `}
 `
+
+class PostContent extends React.PureComponent{
+  render(){
+    return <div dangerouslySetInnerHTML={{ __html: this.props.children }} />
+  }
+}
+
 class BlogPostTemplate extends React.Component {
 
   state = {
