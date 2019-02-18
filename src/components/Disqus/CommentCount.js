@@ -1,5 +1,10 @@
 import React from 'react'
-import { insertScript, removeScript, debounce } from './utils'
+import {
+  insertScript,
+  removeScript,
+  debounce,
+  checkIsBlockByGFW,
+} from './utils'
 
 const queueResetCount = debounce(
   () => {
@@ -36,6 +41,11 @@ export class CommentCount extends React.Component {
   }
 
   loadInstance() {
+    checkIsBlockByGFW()
+      .then(() => this._loadInstance())
+  }
+
+  _loadInstance() {
     const doc = window.document
     if (doc.getElementById('dsq-count-scr')) queueResetCount()
     else

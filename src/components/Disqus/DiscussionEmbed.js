@@ -1,5 +1,5 @@
 import React from 'react'
-import { insertScript, removeScript } from './utils'
+import { insertScript, removeScript, checkIsBlockByGFW } from './utils'
 
 export class DiscussionEmbed extends React.Component {
   componentWillMount() {
@@ -37,6 +37,10 @@ export class DiscussionEmbed extends React.Component {
   }
 
   loadInstance() {
+    checkIsBlockByGFW().then(() => this._loadInstance())
+  }
+
+  _loadInstance() {
     const doc = window.document
     if (window && window.DISQUS && doc.getElementById('dsq-embed-scr')) {
       window.DISQUS.reset({
