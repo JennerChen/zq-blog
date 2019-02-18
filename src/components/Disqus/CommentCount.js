@@ -43,6 +43,7 @@ export class CommentCount extends React.Component {
   loadInstance() {
     checkIsBlockByGFW()
       .then(() => this._loadInstance())
+      .catch((error) => null)
   }
 
   _loadInstance() {
