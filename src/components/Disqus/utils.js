@@ -1,4 +1,4 @@
-import ping from 'web-pingjs'
+import ping from './web-ping'
 
 export function insertScript(src, id, parentElement) {
   const script = window.document.createElement('script')
@@ -51,8 +51,8 @@ export function checkIsBlockByGFW() {
     return checkPromise
   }
 
-  // 检测距离上次检测时间是否小于30s, 如果是, 封装成promise, 直接返回
-  if (lastCheckTime && lastCheckTime + 30 * 1000 <= new Date().getTime()) {
+  // 检测距离上次检测时间是否小于5s, 如果是, 封装成promise, 直接返回
+  if (lastCheckTime && lastCheckTime + 5 * 1000 >= new Date().getTime()) {
     return isBlockByGFW
       ? Promise.reject(new Error('Timeout'))
       : Promise.resolve(true)
@@ -61,13 +61,13 @@ export function checkIsBlockByGFW() {
   // 既没有缓存请求, 也超过了超时时间, 重新检查
   lastCheckTime = new Date().getTime()
   isPinging = true
-  checkPromise = ping('https://links.services.disqus.com')
+  checkPromise = ping('https://disqus.com/favicon.ico')
     .then(() => {
       isBlockByGFW = false
     })
     .catch(() => {
       isBlockByGFW = true
-      return Promise.reject(new Error("Timeout"))
+      return Promise.reject(new Error('Timeout'))
     })
     .finally(() => {
       // 重置状态

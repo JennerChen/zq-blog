@@ -40,8 +40,7 @@
     "typeface-montserrat": "0.0.43",
     "typography": "^0.16.17",
     "typography-theme-github": "^0.16.18",
-    "typography-theme-wordpress-2016": "^0.15.10",
-    "web-pingjs": "^1.0.1"
+    "typography-theme-wordpress-2016": "^0.15.10"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

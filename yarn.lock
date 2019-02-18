@@ -13034,11 +13034,6 @@ web-namespaces@^1.0.0, web-namespaces@^1.1.2:
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-1.1.2.tgz#c8dc267ab639505276bae19e129dbd6ae72b22b4"
   integrity sha512-II+n2ms4mPxK+RnIxRPOw3zwF2jRscdJIUE9BfkKHm4FYEg9+biIoTMnaZF5MpemE3T+VhMLrhbyD4ilkPCSbg==
 
-web-pingjs@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/web-pingjs/-/web-pingjs-1.0.1.tgz#4de7d3c678482571a4faba9872d189d908fe83af"
-  integrity sha512-rlAeWwOWLYpFUAzi1edajOm6iWsP4EVnjl7qXsyXglVt8Wuwxo1d8GQgeyZ6Ze3gRf0xtvQCmb2eQ1OOAGbN1A==
-
 webpack-dev-middleware@3.4.0, webpack-dev-middleware@^3.0.1:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-3.4.0.tgz#1132fecc9026fd90f0ecedac5cbff75d1fb45890"

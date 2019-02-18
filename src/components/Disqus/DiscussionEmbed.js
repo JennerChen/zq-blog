@@ -1,6 +1,18 @@
 import React from 'react'
 import { insertScript, removeScript, checkIsBlockByGFW } from './utils'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const fadeIn = keyframes`
+    from{
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    
+    to{
+        opacity: 1;
+        transform: scaleY(1);
+    }
+`
 
 const AlertContainer = styled.div`
   color: #a94442;
@@ -10,7 +22,8 @@ const AlertContainer = styled.div`
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
-
+  animation: ${fadeIn} 0.6s;
+  transform-origin: top;
   & code {
     background-color: #efefef;
     border-radius: 4px;
@@ -35,8 +48,9 @@ export class DiscussionEmbed extends React.Component {
     this.loadInstance()
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps, nextState) {
     if (this.props.shortname !== nextProps.shortname) return true
+    if (nextState.blockByGFW !== this.state.blockByGFW) return true
 
     const nextConfig = nextProps.config
     const config = this.props.config
@@ -64,11 +78,11 @@ export class DiscussionEmbed extends React.Component {
         })
         this._loadInstance()
       })
-      .catch(() =>
+      .catch(() => {
         this.setState({
           blockByGFW: true,
         })
-      )
+      })
   }
 
   _loadInstance() {
