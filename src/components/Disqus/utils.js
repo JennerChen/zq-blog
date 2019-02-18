@@ -47,7 +47,7 @@ let checkPromise = null
  */
 export function checkIsBlockByGFW() {
   // 如果正在请求, 直接返回缓存的promise
-  if (isPinging) {
+  if (isPinging && checkPromise) {
     return checkPromise
   }
 
@@ -71,7 +71,7 @@ export function checkIsBlockByGFW() {
     .finally(() => {
       // 重置状态
       isPinging = false
-      checkPromise = null;
+      checkPromise = null
     })
   return checkPromise
 }

@@ -1,7 +1,27 @@
 import React from 'react'
 import { insertScript, removeScript, checkIsBlockByGFW } from './utils'
+import styled from 'styled-components'
+
+const AlertContainer = styled.div`
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  & code {
+    background-color: #efefef;
+    border-radius: 4px;
+  }
+`
 
 export class DiscussionEmbed extends React.Component {
+  state = {
+    blockByGFW: false,
+  }
+
   componentWillMount() {
     if (
       typeof window !== 'undefined' &&
@@ -37,7 +57,18 @@ export class DiscussionEmbed extends React.Component {
   }
 
   loadInstance() {
-    checkIsBlockByGFW().then(() => this._loadInstance())
+    checkIsBlockByGFW()
+      .then(() => {
+        this.setState({
+          blockByGFW: false,
+        })
+        this._loadInstance()
+      })
+      .catch(() =>
+        this.setState({
+          blockByGFW: true,
+        })
+      )
   }
 
   _loadInstance() {
@@ -85,6 +116,34 @@ export class DiscussionEmbed extends React.Component {
   }
 
   render() {
-    return <div id="disqus_thread" />
+    return (
+      <>
+        {!this.state.blockByGFW ? (
+          <AlertContainer>
+            由于
+            <a
+              href={
+                'https://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E'
+              }
+              target={'_blank'}
+            >
+              中国政策GFW
+            </a>
+            , 评论系统无法使用。
+            <p>
+              你可以使用vpn代理域名 <code>*.disqus.com</code>下所有请求, 然后
+              <a
+                href={'javascript:void(0);'}
+                onClick={() => this.loadInstance()}
+              >
+                点击这里
+              </a>
+              即可重新加载评论
+            </p>
+          </AlertContainer>
+        ) : null}
+        <div id="disqus_thread" />
+      </>
+    )
   }
 }
