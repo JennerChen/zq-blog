@@ -67,6 +67,7 @@ export function checkIsBlockByGFW() {
     })
     .catch(() => {
       isBlockByGFW = true
+      return Promise.reject(new Error("Timeout"))
     })
     .finally(() => {
       // 重置状态
