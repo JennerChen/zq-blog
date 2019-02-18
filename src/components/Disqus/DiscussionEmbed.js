@@ -118,7 +118,7 @@ export class DiscussionEmbed extends React.Component {
   render() {
     return (
       <>
-        {!this.state.blockByGFW ? (
+        {this.state.blockByGFW ? (
           <AlertContainer>
             由于
             <a
