@@ -1,19 +1,3 @@
-function request_image(url) {
-  return new Promise(function(resolve, reject) {
-    var img = new Image()
-    img.onload = function() {
-      resolve(img)
-    }
-    img.onerror = function(err) {
-      reject(url)
-    }
-    img.src =
-      url +
-      '?random-no-cache=' +
-      Math.floor((1 + Math.random()) * 0x10000).toString(16)
-  })
-}
-
 /**
  * Pings a url.
  * @param  {String} url
@@ -28,12 +12,22 @@ export default function ping(url, multiplier) {
       delta *= multiplier || 1
       resolve(delta)
     }
-    request_image(url)
-      .then(response)
-      .catch(() => reject(new Error('Timeout')))
+
+    var img = new Image()
+    img.onload = function() {
+      response()
+    }
+    img.onerror = function(err) {
+      reject(new Error('Timeout'))
+    }
+    img.src =
+      url +
+      '?random-no-cache=' +
+      Math.floor((1 + Math.random()) * 0x10000).toString(16)
 
     // Set a timeout for max-pings, 5s.
     setTimeout(function() {
+      img.src = ''
       reject(Error('Timeout'))
     }, 1000)
   })
