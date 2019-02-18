@@ -1,10 +1,10 @@
 {
-  "name": "gatsby-starter-blog",
-  "description": "Starter Gatsby Blog",
+  "name": "zq-blog",
+  "description": "张庆 笔记 个人工作 张庆的个人工作笔记 博客 日志 技术 前端",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Zhang Qing <zhangqing332@live.com>",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
+    "url": "https://github.com/JennerChen/zq-blog/issues"
   },
   "dependencies": {
     "@gatsby-contrib/gatsby-plugin-elasticlunr-search": "^2.1.1",
@@ -40,7 +40,8 @@
     "typeface-montserrat": "0.0.43",
     "typography": "^0.16.17",
     "typography-theme-github": "^0.16.18",
-    "typography-theme-wordpress-2016": "^0.15.10"
+    "typography-theme-wordpress-2016": "^0.15.10",
+    "web-pingjs": "^1.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -49,7 +50,7 @@
     "gh-pages": "^1.2.0",
     "prettier": "^1.14.2"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://zqblog.beaf.tech",
   "keywords": [
     "gatsby"
   ],
@@ -57,7 +58,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/JennerChen/zq-blog.git"
   },
   "scripts": {
     "dev": "gatsby develop",
