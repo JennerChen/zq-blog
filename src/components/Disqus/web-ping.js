@@ -27,6 +27,7 @@ export default function ping(url, multiplier) {
 
     // Set a timeout for max-pings, 5s.
     setTimeout(function() {
+      // smart way to cancel request
       img.src = ''
       reject(Error('Timeout'))
     }, 1000)
