@@ -5477,6 +5477,11 @@ gatsby-link@^2.0.7:
     "@types/reach__router" "^1.0.0"
     prop-types "^15.6.1"
 
+gatsby-plugin-baidu-analytics@^1.1.16:
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-baidu-analytics/-/gatsby-plugin-baidu-analytics-1.1.16.tgz#20f9c296826a24da9b4724d6fe3e37691e7efddf"
+  integrity sha512-0W0Y8nrh3m/aXRvIM8A2/bov8fJAClyZ4g/2k4WFzvHVQzKRUaPw/Nv8yVqKWyn9IlvdjpSAvxSL8E4wXzlo4w==
+
 gatsby-plugin-feed@^2.0.8:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-feed/-/gatsby-plugin-feed-2.0.11.tgz#1baa33565c131415a2c971aa49adea02a08bf935"

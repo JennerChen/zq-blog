@@ -53,8 +53,8 @@ module.exports = {
           MarkdownRemark: {
             title: node => node.frontmatter.title,
             tags: node => node.frontmatter.tags,
-            slug: node => node.fields.slug
-//            path: node => node.frontmatter.path,
+            slug: node => node.fields.slug,
+            //            path: node => node.frontmatter.path,
           },
         },
       },
@@ -65,6 +65,15 @@ module.exports = {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: `UA-131289526-1`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-baidu-analytics`,
+      options: {
+        // baidu analytics siteId
+        siteId: 'cb7da21041560cf711590015600dd858',
+        // Put analytics script in the head instead of the body [default:false]
+        head: false,
       },
     },
     `gatsby-plugin-feed`,
@@ -80,7 +89,7 @@ module.exports = {
         icon: `src/assets/beaf.logo.png`,
       },
     },
-//    `gatsby-plugin-offline`,
+    //    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
     {
