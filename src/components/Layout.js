@@ -8,6 +8,7 @@ import styled, {
 } from 'styled-components'
 import LeftSidebar from './LeftSidebar'
 import { GlobalTheme } from '../utils/theme'
+import GoToTop from "../components/GoToTop"
 
 const Flex = styled.div`
   display: flex;
@@ -91,6 +92,7 @@ class Layout extends React.Component {
             {sideBar ? <LeftSidebar tags={tags} /> : null}
             <Content>{children}</Content>
           </Flex>
+          <GoToTop/>
         </Fragment>
       </ThemeProvider>
     )
