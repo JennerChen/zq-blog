@@ -132,6 +132,14 @@ export default class extends Component {
           >
             <i className={'iconfont icon-resume'} />
           </IconButton>
+
+          <IconButton
+            href={'/rss.xml'}
+            target={'_blank'}
+            title={'rss'}
+          >
+            <i className={'iconfont icon-rss'} />
+          </IconButton>
         </StickWrap>
       </Container>
     )

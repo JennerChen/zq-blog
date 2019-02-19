@@ -101,6 +101,7 @@ export default class extends Component {
   handleWindowScroll = () => {
     let btnShouldHide = window.scrollY <= 100
 
+
     if (!btnShouldHide) {
       this.firstRun = false
     }

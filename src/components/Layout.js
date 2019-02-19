@@ -85,7 +85,7 @@ class Layout extends React.Component {
             <link
               rel={'stylesheet'}
               type={'text/css'}
-              href={'//at.alicdn.com/t/font_585271_6fnuvd8aj0d7k3xr.css'}
+              href={'//at.alicdn.com/t/font_585271_t86bw1k535.css'}
             />
           </Helmet>
           <Flex style={{ minHeight: '100%' }}>
