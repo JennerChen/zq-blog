@@ -83,3 +83,8 @@ ssserver -c /sss/config.json -d
 
 > 我还没有😓
 
+## REFERENCE
+
+[shadowsocks](https://github.com/shadowsocks/shadowsocks/tree/master): A fast tunnel proxy that helps you bypass firewalls.
+
+
