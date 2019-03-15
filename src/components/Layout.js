@@ -8,7 +8,7 @@ import styled, {
 } from 'styled-components'
 import LeftSidebar from './LeftSidebar'
 import { GlobalTheme } from '../utils/theme'
-import GoToTop from "../components/GoToTop"
+import GoToTop from '../components/GoToTop'
 
 const Flex = styled.div`
   display: flex;
@@ -44,7 +44,7 @@ const Content = styled.div`
         border-color: rgba(255, 255, 255, 0.2);
       }
 
-      code[class*="language-"] {
+      code[class*='language-'] {
         color: #f95d5d;
       }
     `,
@@ -72,6 +72,44 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
+const FooterContainer = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+`
+
+const IconButton = styled.a`
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: none;
+
+  color: #969696;
+  transition: all 0.3s;
+  margin-right: 1.2em;
+
+  & > i {
+    font-size: 2em;
+  }
+`
+
+class Footer extends React.Component {
+  render() {
+    return (
+      <FooterContainer>
+        Follow me on{' '}
+        <IconButton
+          href={'https://github.com/JennerChen'}
+          target={'_blank'}
+          title={'github'}
+        >
+          <i className={'iconfont icon-github'}/>
+        </IconButton>
+      </FooterContainer>
+    )
+  }
+}
+
 class Layout extends React.Component {
   render() {
     const { title, children, tags, sideBar, meta, theme } = this.props
@@ -90,9 +128,12 @@ class Layout extends React.Component {
           </Helmet>
           <Flex style={{ minHeight: '100%' }}>
             {sideBar ? <LeftSidebar tags={tags} /> : null}
-            <Content>{children}</Content>
+            <Content>
+              {children}
+              <Footer />
+            </Content>
           </Flex>
-          <GoToTop/>
+          <GoToTop />
         </Fragment>
       </ThemeProvider>
     )
