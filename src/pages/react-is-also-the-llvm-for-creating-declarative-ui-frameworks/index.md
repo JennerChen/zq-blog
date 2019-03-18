@@ -18,13 +18,13 @@ React一开始用于web开发, 但最近它的概念能够适用于更多的地�
 
 ![](./3-basic-part-of-react.png)
 
-React有3中基本模块
+React有3种基本模块
 
 1. React Component API: 提供组件API和生命周期
 
 2. React-Reconciler: 它是React核心diff算法管理如何更新UI. Reconciler是真正方法的计算出当前UI的变化, 你可以阅读更多的 reconcilication的内容 https://reactjs.org/docs/reconciliation.html
 
-3. React Renderer: 一个 renderer除了实现一些定义在React-Reconciler得方法,不做任何事情。 React-Reconciler 会执行这些定义的方法然后更新UI。如果你实现这些方法使用DOM API， 那么目标就是web。如果你实现这些使用IOS UI Kit API, 那么目标就是IOS。如果你实现这些方法使用Andorid UI API, 目标就是Android。实际上, 如何支持UI的系统都可以使用React。它不需要使用React去绘制。这种抽象很疯狂。 你可以查看这个有趣的视频 [ Ken Wheeler https://www.youtube.com/watch?v=PBpugV5l90c](https://www.youtube.com/watch?v=PBpugV5l90c) 他使用了一个自定义的renderer实现音乐组合。另外一个有趣的是 [ Dusten Kasten 的React Hardware](https://github.com/iamdustan/react-hardware)
+3. React Renderer: 一个 renderer除了实现一些定义在React-Reconciler的方法,不做任何事情。 React-Reconciler 会执行这些定义的方法然后更新UI。如果你实现这些方法使用DOM API， 那么目标就是web。如果你实现这些使用IOS UI Kit API, 那么目标就是IOS。如果你实现这些方法使用Andorid UI API, 目标就是Android。实际上, 如何支持UI的系统都可以使用React。它不需要使用React去绘制。这种抽象很疯狂。 你可以查看这个有趣的视频 [ Ken Wheeler https://www.youtube.com/watch?v=PBpugV5l90c](https://www.youtube.com/watch?v=PBpugV5l90c) 他使用了一个自定义的renderer实现音乐组合。另外一个有趣的是 [ Dusten Kasten 的React Hardware](https://github.com/iamdustan/react-hardware)
 
 ![](./3-basic-part-of-react-2.png)
 
