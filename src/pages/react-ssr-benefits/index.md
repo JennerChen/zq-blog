@@ -34,7 +34,7 @@ import ReactDOMServer from 'react-dom/server'
 
 import App from '../src/App'
 
-const PORT = 8080
+const PORT = 9090
 const app = express()
 
 const router = express.Router()
@@ -88,3 +88,7 @@ app.listen(PORT, () => {
 > 以上都不是你考虑的, 或者当下你不用考虑
 
 请使用 create-react-app, ssr 只会增加你的使用成本, 他不会给你带来其他的优势。
+
+## Examples
+
+[mini-react-ssr-demo](https://github.com/JennerChen/mini-react-ssr-demo): 使用 create-react-app 最简单实现 ssr
