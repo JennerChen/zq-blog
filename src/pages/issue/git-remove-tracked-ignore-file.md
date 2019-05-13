@@ -13,7 +13,7 @@ tags: ['git']
 git rm --cached <file>
 ```
 
-例如 `git rm -cached -r .idea`: 它会将所有.idea 配置文件全部删除(不会删除实体文件,只是删除 git 缓存)
+例如 `git rm --cached -r .idea`: 它会将所有.idea 配置文件全部删除(不会删除实体文件,只是删除 git 缓存)
 
 # Reference
 
