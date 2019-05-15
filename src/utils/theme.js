@@ -150,4 +150,9 @@ pre[data-line] {
   min-width: 100%;
 }
 
+center{
+   color: rgb(99, 119, 119); 
+   font-size: 14px;
+   margin-bottom: 1.75rem;
+}
   `
