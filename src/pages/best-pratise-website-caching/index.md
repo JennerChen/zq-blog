@@ -109,6 +109,7 @@ Etag 是一种缓存设置。使用 Etag 是让浏览器知道相关资源是否
 
 ## Reference
 
+- [MDN Caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
 - [MDN Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control)
 - [MDN Expires](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires)
 - [MDN Etag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)
