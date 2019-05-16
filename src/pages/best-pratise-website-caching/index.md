@@ -9,7 +9,7 @@ original: 'https://medium.com/pixelpoint/best-practices-for-cache-control-settin
 你也许注意到,有时我们访问网站, 也许会出现样式破裂, 或者报错的情况。通常, 导致这些问题的原因是错误的使用 cache control policy。以至于你无法获取最新部署的资源。这篇文章，我
 将要演示如何正确的设置缓存来帮助你的网站保持实时更新。
 
-> 如果你只想要最终结果并使用它，你可以直接跳转到[结论](#conclusion)
+> 如果你只想要最终结果并使用它，你可以直接跳转到[结论](#结论)
 
 ## 缓存是如何工作的?
 
@@ -26,9 +26,7 @@ original: 'https://medium.com/pixelpoint/best-practices-for-cache-control-settin
 
 如果没有缓存机制, 浏览器会读取每一个请求的资源。 这大幅度增加加载页面的时间, 同时, 也是增加服务器的压力。
 
-![无缓存请求](./request-flow-with-no-cache-setting.jpeg)
-
-<center>无缓存请求</center>
+![无缓存请求](./request-flow-with-no-cache-setting.jpeg "无缓存请求")
 
 当服务器端没有设置缓存机制的话，这完全由浏览器决定是否缓存信息。当前, Chrome 和 Safari 每一次请求都会下载数据。 不同平台这也许
 会有不同的行为。
@@ -41,13 +39,9 @@ Etag 是一种缓存设置。使用 Etag 是让浏览器知道相关资源是否
 下次浏览器请求时, 浏览器不会先下载整个文件,而是发送一个（类）prefligt 请求,包含请求头如`If-None-Match: W/“1d2e7–1648e509289`。
 服务器端会检测是否根据当前的值找到文件,如果有不一样的，强制浏览器获取新文件。否则, 服务器端会通知浏览器使用缓存的文件。
 
-![第一次使用etag请求](./request-flow-with-tag-1st.jpeg)
+![第一次使用etag请求](./request-flow-with-tag-1st.jpeg "第一次使用etag请求")
 
-<center>第一次使用etag请求</center>
-
-![第二次使用etag请求](./request-flow-with-tag-2nd.jpeg)
-
-<center>第二次使用etag请求</center>
+![第二次使用etag请求](./request-flow-with-tag-2nd.jpeg "第二次使用etag请求")
 
 当启用 Etag 缓存策略时, 我们总是让服务端检测文件是否存在,并且只有检测成功之后, 浏览器根据返回结果决定是否读取缓存或者是重新加载。当一个资源/文件
 没有被改动,只会额外产生 80-100 bytes 来验证是否变化，取而代之的是每次获取 10kb 的或者是 10mb 的文件。
@@ -63,17 +57,11 @@ Etag 是一种缓存设置。使用 Etag 是让浏览器知道相关资源是否
 > `Last Modified`是一种脆弱的缓存头, 每种浏览器基于自身的请求决定是否使用重新获取数据。
 > `Google caching best practices guide`
 
-![第一次使用Last Modified请求](./request-flow-with-last-modified.jpeg)
+![第一次使用Last Modified请求](./request-flow-with-last-modified.jpeg "第一次使用Last Modified请求")
 
-<center>第一次使用Last Modified请求</center>
+![第二次使用Last Modified请求(完美情况)](./request-flow-with-last-modifed-2nd-perfect.png "第二次使用Last Modified请求(完美情况)")
 
-![第二次使用Last Modified请求(完美情况)](./request-flow-with-last-modifed-2nd-perfect.png)
-
-<center>第二次使用Last Modified请求(完美情况)</center>
-
-![第二次使用Last Modified请求(一般情况)](./request-flow-with-last-modified-2nd-common-case.jpeg)
-
-<center>第二次使用Last Modified请求(一般情况)</center>
+![第二次使用Last Modified请求(一般情况)](./request-flow-with-last-modified-2nd-common-case.jpeg "第二次使用Last Modified请求(一般情况)")
 
 所以, 我们不能依赖`Last Modified`，我个人更倾向于完全移除相关功能来减少网络请求，虽然这只需要几 bytes
 

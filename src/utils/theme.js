@@ -150,6 +150,16 @@ pre[data-line] {
   min-width: 100%;
 }
 
+.gatsby-resp-image-figure {
+  margin-bottom: 1.75rem;
+  .gatsby-resp-image-figcaption{
+    margin-top: 0.8em;
+    text-align: center;
+    color: rgb(99, 119, 119); 
+    font-size: 14px;
+  }
+}
+
 center{
    color: rgb(99, 119, 119); 
    font-size: 14px;
