@@ -1,7 +1,7 @@
 ---
 title: semantic-release 集成
 date: '2018-12-20'
-tags: [npm,CI,DevOps]
+tags: [npm, CI, DevOps]
 ---
 
 ## 背景
@@ -157,3 +157,7 @@ CI 配置结束。
 ## 结论
 
 相比于用脚本的方式自动发布, semantic-release 更简单、高大上。但也有缺点, 对于内部项目, 不适合, 缺少相关插件，还不如自己写脚本效率和实用
+
+## 缺陷
+
+不支持多分支工作流, 例如 pre-release, 这对复杂项目及其不友好。幸好[release-workflows](https://github.com/semantic-release/evolution/blob/release-workflows/_drafts/release-workflows.md)正在开发, 也许将来某个版本就能支持多分支工作流了，我拭目以待。
