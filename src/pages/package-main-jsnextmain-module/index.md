@@ -19,17 +19,16 @@ package.json 中存在一些特殊字段, main,jsnext:main,module 的区别。�
 | jsnext:main | 社区约定的 esm 文件入口, webpack, rollup 均支持该字段        | esm      |
 | module      | esm 官方约定入口, 支持插件较少,故推荐和 jsnext:main 同时使用 | esm      |
 
-最后, 用代码演示cjs和esm编译后代码的主要区别:
-
+最后, 用代码演示 cjs 和 esm 编译后代码的主要区别:
 
 ```javascript
 // CommonJS(cjs)
 const { foo } = require('./bar')
 
-const baz = foo + "qux"
+const baz = foo + 'qux'
 
 module.exports = {
-  quux: [baz]
+  quux: [baz],
 }
 ```
 
@@ -37,7 +36,7 @@ module.exports = {
 // ECMA module(esm)
 import { foo } from './bar.js'
 
-const baz = foo + "qux"
+const baz = foo + 'qux'
 
 export const quux = [baz]
 ```

@@ -49,7 +49,9 @@
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^1.2.0",
-    "prettier": "^1.14.2"
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
+    "prettier": "^1.17.1"
   },
   "homepage": "https://zqblog.beaf.tech",
   "keywords": [
@@ -71,6 +73,13 @@
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "now-build": "npm run build",
+    "precommit": "lint-staged",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
