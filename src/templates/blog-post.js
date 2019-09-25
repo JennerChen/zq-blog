@@ -9,6 +9,7 @@ import CopyRightInfo from '../components/CopyRightInfo'
 import { DiscussionEmbed } from '../components/Disqus'
 import Tag from '../components/Tag'
 import DayNightSwitch from '../components/DayNightSwitch'
+import EditOnGithub from '../components/EditOnGithub'
 const PostTitle = styled.h1`
   line-height: 1em;
   transition: all 0.3s;
@@ -68,14 +69,13 @@ const MarkDownContainer = styled.div`
   `}
 `
 
-class PostContent extends React.PureComponent{
-  render(){
+class PostContent extends React.PureComponent {
+  render() {
     return <div dangerouslySetInnerHTML={{ __html: this.props.children }} />
   }
 }
 
 class BlogPostTemplate extends React.Component {
-
   state = {
     mode: 'light',
   }
@@ -86,7 +86,7 @@ class BlogPostTemplate extends React.Component {
       localStorage.getItem('theme') &&
       localStorage.getItem('theme') !== this.state.mode
     ) {
-      console.log(`use theme ${ this.state.mode }`)
+      console.log(`use theme ${this.state.mode}`)
       this.setState({
         mode: localStorage.getItem('theme'),
       })
@@ -126,6 +126,8 @@ class BlogPostTemplate extends React.Component {
             checked={this.state.mode === 'light'}
             onChange={val => this.toggleDarkMode(val)}
           />
+
+          <EditOnGithub slug={this.props.pageContext.slug} />
         </div>
         <MarkDownContainer>
           <PostTitle>{post.frontmatter.title}</PostTitle>
