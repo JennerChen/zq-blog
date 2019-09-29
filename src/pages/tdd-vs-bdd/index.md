@@ -66,6 +66,8 @@ BDD(Behaviour-Driven Development): 设定一个目标(可以是先编写测试�
 
 > 但是, 时间是有限的，所以个人建议只对核心的功能进行测试。
 
+![noTime](https://media.giphy.com/media/3o6Ei2yv8fqpR3nJG8/giphy.gif)
+
 ## Reference
 
 - [Test-driven development](https://en.wikipedia.org/wiki/Test-driven_development)
