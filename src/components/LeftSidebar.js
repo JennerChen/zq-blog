@@ -1,9 +1,25 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Link } from 'gatsby'
-import { rhythm, scale } from '../utils/typography'
+import { rhythm } from '../utils/typography'
 import media from 'styled-media-query'
 import Tag from './Tag'
+
+const BlinkStart = keyframes`
+  from, to { border-color: #39F; }
+  50% { border-color: transparent; }
+`
+
+const BlinkEnd = keyframes`
+    from, to { border-color: #39F; }
+  50% { border-color: transparent; }
+`
+
+const Typing = keyframes`
+    from { width: 0; }
+  to   { width: 240px; }
+
+`
 
 const Container = styled.div`
   display: flex;
@@ -12,6 +28,7 @@ const Container = styled.div`
   flex-shrink: 0;
   padding: ${rhythm(1.5)} ${rhythm(1)};
   flex-direction: column;
+  position: relative;
 
   ${media.lessThan('large')`
     display: none;
@@ -24,7 +41,7 @@ const MyName = styled.h2`
 
 const StickWrap = styled.div`
   position: sticky;
-  top: 0;
+  top: 0px;
 `
 
 const Desc = styled.p`
@@ -71,6 +88,28 @@ const IconButton = styled.a`
   }
 `
 
+const Slogan = styled.div`
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 0;
+  border-right: 0.125em solid #39f;
+  animation-duration: 1s, 1s, 1s;
+  animation-timing-function: linear, steps(13, end), linear;
+  animation-delay: 0s, 1s, 2s;
+  animation-iteration-count: 1, 1, infinite;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-name: ${BlinkStart}, ${Typing}, ${BlinkEnd};
+  font-style: italic;
+  margin-bottom: 10px;
+  span {
+    color: #fff;
+    display: block;
+    width: 240px;
+  }
+`
+
 export default class extends Component {
   render() {
     let tags = (this.props.tags ? this.props.tags : []).sort((a, b) => {
@@ -82,6 +121,7 @@ export default class extends Component {
       <Container>
         <StickWrap>
           <MyName>Zhang Qing</MyName>
+
           <Desc>
             Hi, 我是张庆。一名前端程序员, 这是我记录工作中的笔记📒,
             主要为前端技术问题。不求精品, 只求实用
@@ -95,9 +135,9 @@ export default class extends Component {
 
           {/*<Divider />*/}
 
-          <div style={ { marginTop: ".6em" } }>
+          <div style={{ marginTop: '.6em' }}>
             {/*最多只显示20个*/}
-            {tags.slice(0,20).map(({ fieldValue, totalCount }) => (
+            {tags.slice(0, 20).map(({ fieldValue, totalCount }) => (
               <Tag
                 alwaysShow={true}
                 key={fieldValue}
@@ -108,6 +148,10 @@ export default class extends Component {
           </div>
 
           <Divider />
+
+          <Slogan>
+            <span>Talk is cheap, show my work 👇</span>
+          </Slogan>
 
           <IconButton
             href={'https://github.com/JennerChen'}
@@ -133,11 +177,7 @@ export default class extends Component {
             <i className={'iconfont icon-resume'} />
           </IconButton>
 
-          <IconButton
-            href={'/rss.xml'}
-            target={'_blank'}
-            title={'rss'}
-          >
+          <IconButton href={'/rss.xml'} target={'_blank'} title={'rss'}>
             <i className={'iconfont icon-rss'} />
           </IconButton>
         </StickWrap>
