@@ -49,6 +49,8 @@ location ~ ^\/(scholar_complete)\/* {
 
 这会将所有`/scholar_complete`开头的请求转发到 Google Scholar(谷歌学术)。
 
+- [jsonp](https://www.w3schools.com/js/js_json_jsonp.asp)是一种较老的方式, 现在基本不考虑了。
+
 ## Reference
 
 - [Bearer](https://tools.ietf.org/html/rfc6750)
