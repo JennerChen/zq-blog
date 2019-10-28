@@ -211,6 +211,13 @@ export const pageQuery = graphql`
         original
         commentIdentifier
       }
+      fields {
+        readingTime {
+          time
+          words
+          text
+        }
+      }
     }
   }
 `

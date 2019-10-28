@@ -700,6 +700,7 @@ type directoryGroupConnectionEdge {
 }
 
 type fieldOwners_2 {
+    readingTime: String
     slug: String
 }
 
@@ -712,6 +713,7 @@ type fields_3 {
 }
 
 type fields_4 {
+    readingTime: readingTime_2
     slug: String
 }
 
@@ -885,21 +887,17 @@ type peerDependencies_2 {
 }
 
 type pluginOptions_3 {
-    backgroundColor: String
     background_color: String
     className: String
     display: String
     fields: [String]
     head: Boolean
     icon: String
-    ignoreFileExtensions: [String]
-    linkImagesToOriginal: Boolean
     maxWidth: Int
     name: String
     offsetY: Int
     path: String
     pathCheck: Boolean
-    pathPrefix: String
     pathToConfigModule: String
     plugins: [plugins_2]
     short_name: String
@@ -908,21 +906,15 @@ type pluginOptions_3 {
     start_url: String
     theme_color: String
     trackingId: String
-    withWebp: Boolean
     wrapperStyle: String
 }
 
 type pluginOptions_4 {
-    backgroundColor: String
     className: String
     icon: String
-    ignoreFileExtensions: [String]
-    linkImagesToOriginal: Boolean
     maxWidth: Int
     offsetY: Int
-    pathPrefix: String
     showCaptions: Boolean
-    withWebp: Boolean
     wrapperStyle: String
 }
 
@@ -930,6 +922,7 @@ type plugins_2 {
     browserAPIs: [String]
     id: String
     name: String
+    nodeAPIs: [String]
     pluginFilepath: String
     pluginOptions: pluginOptions_4
     resolve: String
@@ -940,6 +933,13 @@ type plugins_2 {
 type previous {
     fields: fields_2
     frontmatter: frontmatter_2
+}
+
+type readingTime_2 {
+    minutes: Float
+    text: String
+    time: Float
+    words: Int
 }
 
 type siteMetadata_2 {
@@ -1204,6 +1204,10 @@ enum ImageSharpConnectionSortByFieldsEnum {
 
 enum MarkdownRemarkConnectionSortByFieldsEnum {
     excerpt
+    fields___readingTime___minutes
+    fields___readingTime___text
+    fields___readingTime___time
+    fields___readingTime___words
     fields___slug
     fileAbsolutePath
     frontmatter____PARENT
@@ -1217,6 +1221,7 @@ enum MarkdownRemarkConnectionSortByFieldsEnum {
     id
     internal___content
     internal___contentDigest
+    internal___fieldOwners___readingTime
     internal___fieldOwners___slug
     internal___owner
     internal___type
@@ -1281,21 +1286,17 @@ enum SitePluginConnectionSortByFieldsEnum {
     packageJson___version
     parent
     pluginFilepath
-    pluginOptions___backgroundColor
     pluginOptions___background_color
     pluginOptions___className
     pluginOptions___display
     pluginOptions___fields
     pluginOptions___head
     pluginOptions___icon
-    pluginOptions___ignoreFileExtensions
-    pluginOptions___linkImagesToOriginal
     pluginOptions___maxWidth
     pluginOptions___name
     pluginOptions___offsetY
     pluginOptions___path
     pluginOptions___pathCheck
-    pluginOptions___pathPrefix
     pluginOptions___pathToConfigModule
     pluginOptions___plugins
     pluginOptions___short_name
@@ -1304,7 +1305,6 @@ enum SitePluginConnectionSortByFieldsEnum {
     pluginOptions___start_url
     pluginOptions___theme_color
     pluginOptions___trackingId
-    pluginOptions___withWebp
     pluginOptions___wrapperStyle
     resolve
     ssrAPIs
@@ -1530,6 +1530,10 @@ enum markdownRemarkConnectionSortOrderValues {
 }
 
 enum markdownRemarkDistinctEnum {
+    fields___readingTime___minutes
+    fields___readingTime___text
+    fields___readingTime___time
+    fields___readingTime___words
     fields___slug
     fileAbsolutePath
     frontmatter____PARENT
@@ -1541,6 +1545,7 @@ enum markdownRemarkDistinctEnum {
     id
     internal___content
     internal___contentDigest
+    internal___fieldOwners___readingTime
     internal___fieldOwners___slug
     internal___owner
     internal___type
@@ -1549,6 +1554,10 @@ enum markdownRemarkDistinctEnum {
 }
 
 enum markdownRemarkGroupEnum {
+    fields___readingTime___minutes
+    fields___readingTime___text
+    fields___readingTime___time
+    fields___readingTime___words
     fields___slug
     fileAbsolutePath
     frontmatter____PARENT
@@ -1560,6 +1569,7 @@ enum markdownRemarkGroupEnum {
     id
     internal___content
     internal___contentDigest
+    internal___fieldOwners___readingTime
     internal___fieldOwners___slug
     internal___owner
     internal___type
@@ -1643,21 +1653,17 @@ enum sitePluginDistinctEnum {
     packageJson___version
     parent
     pluginFilepath
-    pluginOptions___backgroundColor
     pluginOptions___background_color
     pluginOptions___className
     pluginOptions___display
     pluginOptions___fields
     pluginOptions___head
     pluginOptions___icon
-    pluginOptions___ignoreFileExtensions
-    pluginOptions___linkImagesToOriginal
     pluginOptions___maxWidth
     pluginOptions___name
     pluginOptions___offsetY
     pluginOptions___path
     pluginOptions___pathCheck
-    pluginOptions___pathPrefix
     pluginOptions___pathToConfigModule
     pluginOptions___plugins
     pluginOptions___short_name
@@ -1666,7 +1672,6 @@ enum sitePluginDistinctEnum {
     pluginOptions___start_url
     pluginOptions___theme_color
     pluginOptions___trackingId
-    pluginOptions___withWebp
     pluginOptions___wrapperStyle
     resolve
     ssrAPIs
@@ -1693,21 +1698,17 @@ enum sitePluginGroupEnum {
     packageJson___version
     parent
     pluginFilepath
-    pluginOptions___backgroundColor
     pluginOptions___background_color
     pluginOptions___className
     pluginOptions___display
     pluginOptions___fields
     pluginOptions___head
     pluginOptions___icon
-    pluginOptions___ignoreFileExtensions
-    pluginOptions___linkImagesToOriginal
     pluginOptions___maxWidth
     pluginOptions___name
     pluginOptions___offsetY
     pluginOptions___path
     pluginOptions___pathCheck
-    pluginOptions___pathPrefix
     pluginOptions___pathToConfigModule
     pluginOptions___plugins
     pluginOptions___short_name
@@ -1716,7 +1717,6 @@ enum sitePluginGroupEnum {
     pluginOptions___start_url
     pluginOptions___theme_color
     pluginOptions___trackingId
-    pluginOptions___withWebp
     pluginOptions___wrapperStyle
     resolve
     ssrAPIs
@@ -4108,7 +4108,57 @@ input imageSharpInternalTypeQueryString_2 {
 }
 
 input markdownRemarkConnectionFieldsInputObject_2 {
+    readingTime: markdownRemarkConnectionFieldsReadingTimeInputObject_2
     slug: markdownRemarkConnectionFieldsSlugQueryString_2
+}
+
+input markdownRemarkConnectionFieldsReadingTimeInputObject_2 {
+    minutes: markdownRemarkConnectionFieldsReadingTimeMinutesQueryFloat_2
+    text: markdownRemarkConnectionFieldsReadingTimeTextQueryString_2
+    time: markdownRemarkConnectionFieldsReadingTimeTimeQueryFloat_2
+    words: markdownRemarkConnectionFieldsReadingTimeWordsQueryInteger_2
+}
+
+input markdownRemarkConnectionFieldsReadingTimeMinutesQueryFloat_2 {
+    eq: Float
+    gt: Float
+    gte: Float
+    in: [Float]
+    lt: Float
+    lte: Float
+    ne: Float
+    nin: [Float]
+}
+
+input markdownRemarkConnectionFieldsReadingTimeTextQueryString_2 {
+    eq: String
+    glob: String
+    in: [String]
+    ne: String
+    nin: [String]
+    regex: String
+}
+
+input markdownRemarkConnectionFieldsReadingTimeTimeQueryFloat_2 {
+    eq: Float
+    gt: Float
+    gte: Float
+    in: [Float]
+    lt: Float
+    lte: Float
+    ne: Float
+    nin: [Float]
+}
+
+input markdownRemarkConnectionFieldsReadingTimeWordsQueryInteger_2 {
+    eq: Int
+    gt: Int
+    gte: Int
+    in: [Int]
+    lt: Int
+    lte: Int
+    ne: Int
+    nin: [Int]
 }
 
 input markdownRemarkConnectionFieldsSlugQueryString_2 {
@@ -4220,7 +4270,17 @@ input markdownRemarkConnectionInternalContentQueryString_2 {
 }
 
 input markdownRemarkConnectionInternalFieldOwnersInputObject_2 {
+    readingTime: markdownRemarkConnectionInternalFieldOwnersReadingTimeQueryString_2
     slug: markdownRemarkConnectionInternalFieldOwnersSlugQueryString_2
+}
+
+input markdownRemarkConnectionInternalFieldOwnersReadingTimeQueryString_2 {
+    eq: String
+    glob: String
+    in: [String]
+    ne: String
+    nin: [String]
+    regex: String
 }
 
 input markdownRemarkConnectionInternalFieldOwnersSlugQueryString_2 {
@@ -4273,7 +4333,57 @@ input markdownRemarkConnectionSort {
 }
 
 input markdownRemarkFieldsInputObject_2 {
+    readingTime: markdownRemarkFieldsReadingTimeInputObject_2
     slug: markdownRemarkFieldsSlugQueryString_2
+}
+
+input markdownRemarkFieldsReadingTimeInputObject_2 {
+    minutes: markdownRemarkFieldsReadingTimeMinutesQueryFloat_2
+    text: markdownRemarkFieldsReadingTimeTextQueryString_2
+    time: markdownRemarkFieldsReadingTimeTimeQueryFloat_2
+    words: markdownRemarkFieldsReadingTimeWordsQueryInteger_2
+}
+
+input markdownRemarkFieldsReadingTimeMinutesQueryFloat_2 {
+    eq: Float
+    gt: Float
+    gte: Float
+    in: [Float]
+    lt: Float
+    lte: Float
+    ne: Float
+    nin: [Float]
+}
+
+input markdownRemarkFieldsReadingTimeTextQueryString_2 {
+    eq: String
+    glob: String
+    in: [String]
+    ne: String
+    nin: [String]
+    regex: String
+}
+
+input markdownRemarkFieldsReadingTimeTimeQueryFloat_2 {
+    eq: Float
+    gt: Float
+    gte: Float
+    in: [Float]
+    lt: Float
+    lte: Float
+    ne: Float
+    nin: [Float]
+}
+
+input markdownRemarkFieldsReadingTimeWordsQueryInteger_2 {
+    eq: Int
+    gt: Int
+    gte: Int
+    in: [Int]
+    lt: Int
+    lte: Int
+    ne: Int
+    nin: [Int]
 }
 
 input markdownRemarkFieldsSlugQueryString_2 {
@@ -4385,7 +4495,17 @@ input markdownRemarkInternalContentQueryString_2 {
 }
 
 input markdownRemarkInternalFieldOwnersInputObject_2 {
+    readingTime: markdownRemarkInternalFieldOwnersReadingTimeQueryString_2
     slug: markdownRemarkInternalFieldOwnersSlugQueryString_2
+}
+
+input markdownRemarkInternalFieldOwnersReadingTimeQueryString_2 {
+    eq: String
+    glob: String
+    in: [String]
+    ne: String
+    nin: [String]
+    regex: String
 }
 
 input markdownRemarkInternalFieldOwnersSlugQueryString_2 {
@@ -5457,15 +5577,6 @@ input sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString {
     regex: String
 }
 
-input sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePageConnectionPluginCreatorPluginOptionsClassNameQueryString {
     eq: String
     glob: String
@@ -5509,31 +5620,18 @@ input sitePageConnectionPluginCreatorPluginOptionsIconQueryString {
     regex: String
 }
 
-input sitePageConnectionPluginCreatorPluginOptionsIgnoreFileExtensionsQueryList {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePageConnectionPluginCreatorPluginOptionsInputObject {
-    backgroundColor: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString
-    background_color: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2
+    background_color: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString
     className: sitePageConnectionPluginCreatorPluginOptionsClassNameQueryString
     display: sitePageConnectionPluginCreatorPluginOptionsDisplayQueryString
     fields: sitePageConnectionPluginCreatorPluginOptionsFieldsQueryList
     head: sitePageConnectionPluginCreatorPluginOptionsHeadQueryBoolean
     icon: sitePageConnectionPluginCreatorPluginOptionsIconQueryString
-    ignoreFileExtensions: sitePageConnectionPluginCreatorPluginOptionsIgnoreFileExtensionsQueryList
-    linkImagesToOriginal: sitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean
     maxWidth: sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger
     name: sitePageConnectionPluginCreatorPluginOptionsNameQueryString
     offsetY: sitePageConnectionPluginCreatorPluginOptionsOffsetYQueryInteger
     path: sitePageConnectionPluginCreatorPluginOptionsPathQueryString
     pathCheck: sitePageConnectionPluginCreatorPluginOptionsPathCheckQueryBoolean
-    pathPrefix: sitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString
     pathToConfigModule: sitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString
     plugins: sitePageConnectionPluginCreatorPluginOptionsPluginsQueryList
     short_name: sitePageConnectionPluginCreatorPluginOptionsShortNameQueryString
@@ -5542,15 +5640,7 @@ input sitePageConnectionPluginCreatorPluginOptionsInputObject {
     start_url: sitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString
     theme_color: sitePageConnectionPluginCreatorPluginOptionsThemeColorQueryString
     trackingId: sitePageConnectionPluginCreatorPluginOptionsTrackingIdQueryString
-    withWebp: sitePageConnectionPluginCreatorPluginOptionsWithWebpQueryBoolean
     wrapperStyle: sitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString
-}
-
-input sitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger {
@@ -5589,15 +5679,6 @@ input sitePageConnectionPluginCreatorPluginOptionsPathCheckQueryBoolean {
     in: [Boolean]
     ne: Boolean
     nin: [Boolean]
-}
-
-input sitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPathQueryString {
@@ -5640,6 +5721,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsInputObject {
     browserAPIs: sitePageConnectionPluginCreatorPluginOptionsPluginsBrowserApIsQueryList
     id: sitePageConnectionPluginCreatorPluginOptionsPluginsIdQueryString
     name: sitePageConnectionPluginCreatorPluginOptionsPluginsNameQueryString
+    nodeAPIs: sitePageConnectionPluginCreatorPluginOptionsPluginsNodeApIsQueryList
     pluginFilepath: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryString
     pluginOptions: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject
     resolve: sitePageConnectionPluginCreatorPluginOptionsPluginsResolveQueryString
@@ -5656,7 +5738,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsNameQueryString {
     regex: String
 }
 
-input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
+input sitePageConnectionPluginCreatorPluginOptionsPluginsNodeApIsQueryList {
     eq: String
     glob: String
     in: [String]
@@ -5665,7 +5747,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryStri
     regex: String
 }
 
-input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
     eq: String
     glob: String
     in: [String]
@@ -5692,34 +5774,13 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsIconQueryS
     regex: String
 }
 
-input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsIgnoreFileExtensionsQueryList {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
-    backgroundColor: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString
     className: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsClassNameQueryString
     icon: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsIconQueryString
-    ignoreFileExtensions: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsIgnoreFileExtensionsQueryList
-    linkImagesToOriginal: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean
     maxWidth: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger
     offsetY: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsOffsetYQueryInteger
-    pathPrefix: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString
     showCaptions: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean
-    withWebp: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean
     wrapperStyle: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString
-}
-
-input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
@@ -5744,23 +5805,7 @@ input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsOffsetYQue
     nin: [Int]
 }
 
-input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
-}
-
-input sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean {
     eq: Boolean
     in: [Boolean]
     ne: Boolean
@@ -5857,13 +5902,6 @@ input sitePageConnectionPluginCreatorPluginOptionsTrackingIdQueryString {
     ne: String
     nin: [String]
     regex: String
-}
-
-input sitePageConnectionPluginCreatorPluginOptionsWithWebpQueryBoolean {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString {
@@ -6370,15 +6408,6 @@ input sitePagePluginCreatorPluginOptionsBackgroundColorQueryString {
     regex: String
 }
 
-input sitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePagePluginCreatorPluginOptionsClassNameQueryString {
     eq: String
     glob: String
@@ -6422,31 +6451,18 @@ input sitePagePluginCreatorPluginOptionsIconQueryString {
     regex: String
 }
 
-input sitePagePluginCreatorPluginOptionsIgnoreFileExtensionsQueryList {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePagePluginCreatorPluginOptionsInputObject {
-    backgroundColor: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString
-    background_color: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2
+    background_color: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString
     className: sitePagePluginCreatorPluginOptionsClassNameQueryString
     display: sitePagePluginCreatorPluginOptionsDisplayQueryString
     fields: sitePagePluginCreatorPluginOptionsFieldsQueryList
     head: sitePagePluginCreatorPluginOptionsHeadQueryBoolean
     icon: sitePagePluginCreatorPluginOptionsIconQueryString
-    ignoreFileExtensions: sitePagePluginCreatorPluginOptionsIgnoreFileExtensionsQueryList
-    linkImagesToOriginal: sitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean
     maxWidth: sitePagePluginCreatorPluginOptionsMaxWidthQueryInteger
     name: sitePagePluginCreatorPluginOptionsNameQueryString
     offsetY: sitePagePluginCreatorPluginOptionsOffsetYQueryInteger
     path: sitePagePluginCreatorPluginOptionsPathQueryString
     pathCheck: sitePagePluginCreatorPluginOptionsPathCheckQueryBoolean
-    pathPrefix: sitePagePluginCreatorPluginOptionsPathPrefixQueryString
     pathToConfigModule: sitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString
     plugins: sitePagePluginCreatorPluginOptionsPluginsQueryList
     short_name: sitePagePluginCreatorPluginOptionsShortNameQueryString
@@ -6455,15 +6471,7 @@ input sitePagePluginCreatorPluginOptionsInputObject {
     start_url: sitePagePluginCreatorPluginOptionsStartUrlQueryString
     theme_color: sitePagePluginCreatorPluginOptionsThemeColorQueryString
     trackingId: sitePagePluginCreatorPluginOptionsTrackingIdQueryString
-    withWebp: sitePagePluginCreatorPluginOptionsWithWebpQueryBoolean
     wrapperStyle: sitePagePluginCreatorPluginOptionsWrapperStyleQueryString
-}
-
-input sitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePagePluginCreatorPluginOptionsMaxWidthQueryInteger {
@@ -6502,15 +6510,6 @@ input sitePagePluginCreatorPluginOptionsPathCheckQueryBoolean {
     in: [Boolean]
     ne: Boolean
     nin: [Boolean]
-}
-
-input sitePagePluginCreatorPluginOptionsPathPrefixQueryString {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
 }
 
 input sitePagePluginCreatorPluginOptionsPathQueryString {
@@ -6553,6 +6552,7 @@ input sitePagePluginCreatorPluginOptionsPluginsInputObject {
     browserAPIs: sitePagePluginCreatorPluginOptionsPluginsBrowserApIsQueryList
     id: sitePagePluginCreatorPluginOptionsPluginsIdQueryString
     name: sitePagePluginCreatorPluginOptionsPluginsNameQueryString
+    nodeAPIs: sitePagePluginCreatorPluginOptionsPluginsNodeApIsQueryList
     pluginFilepath: sitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString
     pluginOptions: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject
     resolve: sitePagePluginCreatorPluginOptionsPluginsResolveQueryString
@@ -6569,7 +6569,7 @@ input sitePagePluginCreatorPluginOptionsPluginsNameQueryString {
     regex: String
 }
 
-input sitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
+input sitePagePluginCreatorPluginOptionsPluginsNodeApIsQueryList {
     eq: String
     glob: String
     in: [String]
@@ -6578,7 +6578,7 @@ input sitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
     regex: String
 }
 
-input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+input sitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
     eq: String
     glob: String
     in: [String]
@@ -6605,34 +6605,13 @@ input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsIconQueryString {
     regex: String
 }
 
-input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsIgnoreFileExtensionsQueryList {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
-    backgroundColor: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString
     className: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsClassNameQueryString
     icon: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsIconQueryString
-    ignoreFileExtensions: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsIgnoreFileExtensionsQueryList
-    linkImagesToOriginal: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean
     maxWidth: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger
     offsetY: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsOffsetYQueryInteger
-    pathPrefix: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString
     showCaptions: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean
-    withWebp: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean
     wrapperStyle: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString
-}
-
-input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
@@ -6657,23 +6636,7 @@ input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsOffsetYQueryInteger 
     nin: [Int]
 }
 
-input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
-}
-
-input sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean {
     eq: Boolean
     in: [Boolean]
     ne: Boolean
@@ -6770,13 +6733,6 @@ input sitePagePluginCreatorPluginOptionsTrackingIdQueryString {
     ne: String
     nin: [String]
     regex: String
-}
-
-input sitePagePluginCreatorPluginOptionsWithWebpQueryBoolean {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePagePluginCreatorPluginOptionsWrapperStyleQueryString {
@@ -7068,16 +7024,7 @@ input sitePluginConnectionPluginFilepathQueryString_2 {
     regex: String
 }
 
-input sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
-input sitePluginConnectionPluginOptionsBackgroundColorQueryString_4 {
+input sitePluginConnectionPluginOptionsBackgroundColorQueryString_2 {
     eq: String
     glob: String
     in: [String]
@@ -7129,31 +7076,18 @@ input sitePluginConnectionPluginOptionsIconQueryString_2 {
     regex: String
 }
 
-input sitePluginConnectionPluginOptionsIgnoreFileExtensionsQueryList_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePluginConnectionPluginOptionsInputObject_2 {
-    backgroundColor: sitePluginConnectionPluginOptionsBackgroundColorQueryString_3
-    background_color: sitePluginConnectionPluginOptionsBackgroundColorQueryString_4
+    background_color: sitePluginConnectionPluginOptionsBackgroundColorQueryString_2
     className: sitePluginConnectionPluginOptionsClassNameQueryString_2
     display: sitePluginConnectionPluginOptionsDisplayQueryString_2
     fields: sitePluginConnectionPluginOptionsFieldsQueryList_2
     head: sitePluginConnectionPluginOptionsHeadQueryBoolean_2
     icon: sitePluginConnectionPluginOptionsIconQueryString_2
-    ignoreFileExtensions: sitePluginConnectionPluginOptionsIgnoreFileExtensionsQueryList_2
-    linkImagesToOriginal: sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2
     maxWidth: sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2
     name: sitePluginConnectionPluginOptionsNameQueryString_2
     offsetY: sitePluginConnectionPluginOptionsOffsetYQueryInteger_2
     path: sitePluginConnectionPluginOptionsPathQueryString_2
     pathCheck: sitePluginConnectionPluginOptionsPathCheckQueryBoolean_2
-    pathPrefix: sitePluginConnectionPluginOptionsPathPrefixQueryString_2
     pathToConfigModule: sitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2
     plugins: sitePluginConnectionPluginOptionsPluginsQueryList_2
     short_name: sitePluginConnectionPluginOptionsShortNameQueryString_2
@@ -7162,15 +7096,7 @@ input sitePluginConnectionPluginOptionsInputObject_2 {
     start_url: sitePluginConnectionPluginOptionsStartUrlQueryString_2
     theme_color: sitePluginConnectionPluginOptionsThemeColorQueryString_2
     trackingId: sitePluginConnectionPluginOptionsTrackingIdQueryString_2
-    withWebp: sitePluginConnectionPluginOptionsWithWebpQueryBoolean_2
     wrapperStyle: sitePluginConnectionPluginOptionsWrapperStyleQueryString_2
-}
-
-input sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
@@ -7209,15 +7135,6 @@ input sitePluginConnectionPluginOptionsPathCheckQueryBoolean_2 {
     in: [Boolean]
     ne: Boolean
     nin: [Boolean]
-}
-
-input sitePluginConnectionPluginOptionsPathPrefixQueryString_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
 }
 
 input sitePluginConnectionPluginOptionsPathQueryString_2 {
@@ -7260,6 +7177,7 @@ input sitePluginConnectionPluginOptionsPluginsInputObject_2 {
     browserAPIs: sitePluginConnectionPluginOptionsPluginsBrowserApIsQueryList_2
     id: sitePluginConnectionPluginOptionsPluginsIdQueryString_2
     name: sitePluginConnectionPluginOptionsPluginsNameQueryString_2
+    nodeAPIs: sitePluginConnectionPluginOptionsPluginsNodeApIsQueryList_2
     pluginFilepath: sitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2
     pluginOptions: sitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2
     resolve: sitePluginConnectionPluginOptionsPluginsResolveQueryString_2
@@ -7276,7 +7194,7 @@ input sitePluginConnectionPluginOptionsPluginsNameQueryString_2 {
     regex: String
 }
 
-input sitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 {
+input sitePluginConnectionPluginOptionsPluginsNodeApIsQueryList_2 {
     eq: String
     glob: String
     in: [String]
@@ -7285,7 +7203,7 @@ input sitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 {
     regex: String
 }
 
-input sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 {
+input sitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 {
     eq: String
     glob: String
     in: [String]
@@ -7312,34 +7230,13 @@ input sitePluginConnectionPluginOptionsPluginsPluginOptionsIconQueryString_2 {
     regex: String
 }
 
-input sitePluginConnectionPluginOptionsPluginsPluginOptionsIgnoreFileExtensionsQueryList_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 {
-    backgroundColor: sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2
     className: sitePluginConnectionPluginOptionsPluginsPluginOptionsClassNameQueryString_2
     icon: sitePluginConnectionPluginOptionsPluginsPluginOptionsIconQueryString_2
-    ignoreFileExtensions: sitePluginConnectionPluginOptionsPluginsPluginOptionsIgnoreFileExtensionsQueryList_2
-    linkImagesToOriginal: sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2
     maxWidth: sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2
     offsetY: sitePluginConnectionPluginOptionsPluginsPluginOptionsOffsetYQueryInteger_2
-    pathPrefix: sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2
     showCaptions: sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2
-    withWebp: sitePluginConnectionPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean_2
     wrapperStyle: sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2
-}
-
-input sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
@@ -7364,23 +7261,7 @@ input sitePluginConnectionPluginOptionsPluginsPluginOptionsOffsetYQueryInteger_2
     nin: [Int]
 }
 
-input sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
-}
-
-input sitePluginConnectionPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean_2 {
     eq: Boolean
     in: [Boolean]
     ne: Boolean
@@ -7477,13 +7358,6 @@ input sitePluginConnectionPluginOptionsTrackingIdQueryString_2 {
     ne: String
     nin: [String]
     regex: String
-}
-
-input sitePluginConnectionPluginOptionsWithWebpQueryBoolean_2 {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePluginConnectionPluginOptionsWrapperStyleQueryString_2 {
@@ -7753,16 +7627,7 @@ input sitePluginPluginFilepathQueryString_2 {
     regex: String
 }
 
-input sitePluginPluginOptionsBackgroundColorQueryString_3 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
-input sitePluginPluginOptionsBackgroundColorQueryString_4 {
+input sitePluginPluginOptionsBackgroundColorQueryString_2 {
     eq: String
     glob: String
     in: [String]
@@ -7814,31 +7679,18 @@ input sitePluginPluginOptionsIconQueryString_2 {
     regex: String
 }
 
-input sitePluginPluginOptionsIgnoreFileExtensionsQueryList_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePluginPluginOptionsInputObject_2 {
-    backgroundColor: sitePluginPluginOptionsBackgroundColorQueryString_3
-    background_color: sitePluginPluginOptionsBackgroundColorQueryString_4
+    background_color: sitePluginPluginOptionsBackgroundColorQueryString_2
     className: sitePluginPluginOptionsClassNameQueryString_2
     display: sitePluginPluginOptionsDisplayQueryString_2
     fields: sitePluginPluginOptionsFieldsQueryList_2
     head: sitePluginPluginOptionsHeadQueryBoolean_2
     icon: sitePluginPluginOptionsIconQueryString_2
-    ignoreFileExtensions: sitePluginPluginOptionsIgnoreFileExtensionsQueryList_2
-    linkImagesToOriginal: sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2
     maxWidth: sitePluginPluginOptionsMaxWidthQueryInteger_2
     name: sitePluginPluginOptionsNameQueryString_2
     offsetY: sitePluginPluginOptionsOffsetYQueryInteger_2
     path: sitePluginPluginOptionsPathQueryString_2
     pathCheck: sitePluginPluginOptionsPathCheckQueryBoolean_2
-    pathPrefix: sitePluginPluginOptionsPathPrefixQueryString_2
     pathToConfigModule: sitePluginPluginOptionsPathToConfigModuleQueryString_2
     plugins: sitePluginPluginOptionsPluginsQueryList_2
     short_name: sitePluginPluginOptionsShortNameQueryString_2
@@ -7847,15 +7699,7 @@ input sitePluginPluginOptionsInputObject_2 {
     start_url: sitePluginPluginOptionsStartUrlQueryString_2
     theme_color: sitePluginPluginOptionsThemeColorQueryString_2
     trackingId: sitePluginPluginOptionsTrackingIdQueryString_2
-    withWebp: sitePluginPluginOptionsWithWebpQueryBoolean_2
     wrapperStyle: sitePluginPluginOptionsWrapperStyleQueryString_2
-}
-
-input sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePluginPluginOptionsMaxWidthQueryInteger_2 {
@@ -7894,15 +7738,6 @@ input sitePluginPluginOptionsPathCheckQueryBoolean_2 {
     in: [Boolean]
     ne: Boolean
     nin: [Boolean]
-}
-
-input sitePluginPluginOptionsPathPrefixQueryString_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
 }
 
 input sitePluginPluginOptionsPathQueryString_2 {
@@ -7945,6 +7780,7 @@ input sitePluginPluginOptionsPluginsInputObject_2 {
     browserAPIs: sitePluginPluginOptionsPluginsBrowserApIsQueryList_2
     id: sitePluginPluginOptionsPluginsIdQueryString_2
     name: sitePluginPluginOptionsPluginsNameQueryString_2
+    nodeAPIs: sitePluginPluginOptionsPluginsNodeApIsQueryList_2
     pluginFilepath: sitePluginPluginOptionsPluginsPluginFilepathQueryString_2
     pluginOptions: sitePluginPluginOptionsPluginsPluginOptionsInputObject_2
     resolve: sitePluginPluginOptionsPluginsResolveQueryString_2
@@ -7961,7 +7797,7 @@ input sitePluginPluginOptionsPluginsNameQueryString_2 {
     regex: String
 }
 
-input sitePluginPluginOptionsPluginsPluginFilepathQueryString_2 {
+input sitePluginPluginOptionsPluginsNodeApIsQueryList_2 {
     eq: String
     glob: String
     in: [String]
@@ -7970,7 +7806,7 @@ input sitePluginPluginOptionsPluginsPluginFilepathQueryString_2 {
     regex: String
 }
 
-input sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 {
+input sitePluginPluginOptionsPluginsPluginFilepathQueryString_2 {
     eq: String
     glob: String
     in: [String]
@@ -7997,34 +7833,13 @@ input sitePluginPluginOptionsPluginsPluginOptionsIconQueryString_2 {
     regex: String
 }
 
-input sitePluginPluginOptionsPluginsPluginOptionsIgnoreFileExtensionsQueryList_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePluginPluginOptionsPluginsPluginOptionsInputObject_2 {
-    backgroundColor: sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2
     className: sitePluginPluginOptionsPluginsPluginOptionsClassNameQueryString_2
     icon: sitePluginPluginOptionsPluginsPluginOptionsIconQueryString_2
-    ignoreFileExtensions: sitePluginPluginOptionsPluginsPluginOptionsIgnoreFileExtensionsQueryList_2
-    linkImagesToOriginal: sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2
     maxWidth: sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2
     offsetY: sitePluginPluginOptionsPluginsPluginOptionsOffsetYQueryInteger_2
-    pathPrefix: sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2
     showCaptions: sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2
-    withWebp: sitePluginPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean_2
     wrapperStyle: sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2
-}
-
-input sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
@@ -8049,23 +7864,7 @@ input sitePluginPluginOptionsPluginsPluginOptionsOffsetYQueryInteger_2 {
     nin: [Int]
 }
 
-input sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 {
-    eq: String
-    glob: String
-    in: [String]
-    ne: String
-    nin: [String]
-    regex: String
-}
-
 input sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
-}
-
-input sitePluginPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean_2 {
     eq: Boolean
     in: [Boolean]
     ne: Boolean
@@ -8162,13 +7961,6 @@ input sitePluginPluginOptionsTrackingIdQueryString_2 {
     ne: String
     nin: [String]
     regex: String
-}
-
-input sitePluginPluginOptionsWithWebpQueryBoolean_2 {
-    eq: Boolean
-    in: [Boolean]
-    ne: Boolean
-    nin: [Boolean]
 }
 
 input sitePluginPluginOptionsWrapperStyleQueryString_2 {
