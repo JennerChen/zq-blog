@@ -7,7 +7,7 @@ steps:
     commands:
       - yarn install
       - yarn run build
-      - ls ./build
+      - ls ./public
 
 trigger:
   branch:
