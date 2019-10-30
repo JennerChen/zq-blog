@@ -1,0 +1,8 @@
+kind: pipeline
+type: docker
+name: my-app
+steps:
+  - name: build
+    image: node
+    commands:
+      - npm -v
