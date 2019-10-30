@@ -5,8 +5,9 @@ steps:
   - name: build
     image: js8zq332/node-yarn
     commands:
-      - npm -v
-      - yarn -v
+      - yarn install
+      - yarn run build
+      - ls ./build
 
 trigger:
   branch:
