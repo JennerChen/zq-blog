@@ -3,9 +3,10 @@ type: docker
 name: my-app
 steps:
   - name: build
-    image: node
+    image: js8zq332/node-yarn
     commands:
       - npm -v
+      - yarn -v
 
 trigger:
   branch:
