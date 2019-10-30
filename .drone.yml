@@ -6,3 +6,7 @@ steps:
     image: node
     commands:
       - npm -v
+
+trigger:
+  branch:
+    - master
