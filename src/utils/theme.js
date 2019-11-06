@@ -14,9 +14,6 @@ pre[class*="language-"] {
   word-wrap: normal;
   line-height: 1.5;
   margin-bottom: 0;
-  //max-height: 80em;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
   tab-size: 4;
 
   -webkit-hyphens: none;
