@@ -2,7 +2,7 @@
 title: API keys vs OAuth vs Jwt
 commentIdentifier: 'API keys vs OAuth vs Jwt'
 date: '2019-11-26'
-tags: ['DevOps']
+tags: ['http']
 ---
 
 # API keys vs OAuth vs Jwt
