@@ -42,11 +42,12 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - '44:a6:c2:48:08:33:1e:1a:3d:95:92:23:ae:51:af:24'
+#            - 'd7:97:6e:94:6a:9d:7e:d2:d9:bd:93:ba:48:e4:20:7a'
       - run: cd ~/repo/zq-blog && ls
       - run: ip addr show
       - run: ping -c 5 47.52.171.93
 #      - run: ssh -v root@47.52.171.93
-      - run: echo "ggggg" | ssh -v root@47.100.208.153 "cat > output.txt"
+      - run: echo "ggggg" | ssh -v root@47.52.171.93 "cat > output.txt"
       - run:
           name: Deploy Over SSH
           command: |
