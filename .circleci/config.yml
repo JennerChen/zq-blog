@@ -41,9 +41,9 @@ jobs:
           at: ~/repo
       - add_ssh_keys:
           fingerprints:
-            - 'd7:97:6e:94:6a:9d:7e:d2:d9:bd:93:ba:48:e4:20:7a'
+            - '48:d6:15:f9:aa:d6:1d:f4:84:9b:b1:a0:7c:78:0c:2f'
       - run: cd ~/repo/zq-blog && ls
-      - run: ssh -v root@120.26.82.73
+      - run: ssh -v root@47.52.171.93
 #      - run: echo "ggggg" | ssh -v root@47.100.208.153 "cat > output.txt"
       - run:
           name: Deploy Over SSH
