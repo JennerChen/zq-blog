@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/JennerChen/zq-blog.svg?style=svg)](https://circleci.com/gh/JennerChen/zq-blog)
+[![CircleCI](https://circleci.com/gh/JennerChen/zq-blog/tree/master.svg?style=svg)](https://circleci.com/gh/JennerChen/zq-blog/tree/master)
 
 我的个人博客, 基于 `gatsby-starter-blog`
 

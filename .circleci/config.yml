@@ -28,6 +28,8 @@ jobs:
 
       - run: mv public zq-blog
 
+      - run: ssh root@47.100.208.153
+
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -36,13 +38,14 @@ jobs:
     machine:
       enabled: true
     steps:
-      - run: sudo apt-get update && sudo apt-get install rsync
+#      - run: sudo apt-get update && sudo apt-get install rsync
       - attach_workspace:
           at: ~/repo
       - add_ssh_keys:
           fingerprints:
             - '1d:27:1b:70:da:3b:5f:b8:92:90:8f:0b:d8:0a:ee:95'
       - run: cd ~/repo/zq-blog && ls
+      - run: ssh root@47.100.208.153
       - run:
           name: Deploy Over SSH
           command: |
