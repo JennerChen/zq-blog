@@ -41,7 +41,7 @@ jobs:
           at: ~/repo
       - add_ssh_keys:
           fingerprints:
-            - '48:d6:15:f9:aa:d6:1d:f4:84:9b:b1:a0:7c:78:0c:2f'
+            - '44:a6:c2:48:08:33:1e:1a:3d:95:92:23:ae:51:af:24'
       - run: cd ~/repo/zq-blog && ls
       - run: ssh -v root@47.52.171.93
 #      - run: echo "ggggg" | ssh -v root@47.100.208.153 "cat > output.txt"
