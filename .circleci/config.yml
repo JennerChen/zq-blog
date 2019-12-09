@@ -39,9 +39,9 @@ jobs:
 #      - run: sudo apt-get update && sudo apt-get install rsync
       - attach_workspace:
           at: ~/repo
-#      - add_ssh_keys:
-#          fingerprints:
-#            - '44:a6:c2:48:08:33:1e:1a:3d:95:92:23:ae:51:af:24'
+      - add_ssh_keys:
+          fingerprints:
+            - '44:a6:c2:48:08:33:1e:1a:3d:95:92:23:ae:51:af:24'
       - run: cat ~/.ssh/id_rsa
       - run: cd ~/repo/zq-blog && ls
       - run: ip addr show
