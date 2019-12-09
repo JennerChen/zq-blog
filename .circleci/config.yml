@@ -43,7 +43,8 @@ jobs:
           fingerprints:
             - '1d:27:1b:70:da:3b:5f:b8:92:90:8f:0b:d8:0a:ee:95'
       - run: cd ~/repo/zq-blog && ls
-      - run: ping $BEAF_HOST
+      - run: ssh root@47.100.208.153
+      - run: ls /usr
       - run:
           name: Deploy Over SSH
           command: |
