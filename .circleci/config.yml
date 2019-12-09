@@ -42,7 +42,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - '44:a6:c2:48:08:33:1e:1a:3d:95:92:23:ae:51:af:24'
-      - run: cat ~/.ssh/id_rsa
       - run: cd ~/repo/zq-blog && ls
       - run: ip addr show
       - run: ping -c 5 47.52.171.93
