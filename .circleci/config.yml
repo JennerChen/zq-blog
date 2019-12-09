@@ -45,8 +45,8 @@ jobs:
       - run: cd ~/repo/zq-blog && ls
       - run: ip addr show
       - run: ping -c 5 47.52.171.93
-      - run: ssh -v root@47.52.171.93
-#      - run: echo "ggggg" | ssh -v root@47.100.208.153 "cat > output.txt"
+#      - run: ssh -v root@47.52.171.93
+      - run: echo "ggggg" | ssh -v root@47.100.208.153 "cat > output.txt"
       - run:
           name: Deploy Over SSH
           command: |
