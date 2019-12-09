@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-
       - image: circleci/node:10
 
     working_directory: ~/repo
@@ -42,13 +41,12 @@ jobs:
           at: ~/repo
       - add_ssh_keys:
           fingerprints:
-            - "d7:97:6e:94:6a:9d:7e:d2:d9:bd:93:ba:48:e4:20:7a"
+            - '1d:27:1b:70:da:3b:5f:b8:92:90:8f:0b:d8:0a:ee:95'
       - run: cd ~/repo/zq-blog && ls
       - run:
           name: Deploy Over SSH
           command: |
-            rsync -va --delete ~/repo/zq-blog/ $BEAF_USER@$BEAF_HOST:/usr/web/zq-blog
-#            ssh $BEAF_USER@$BEAF_HOST "cd .. && ls"
+            rsync -va --delete ~/repo/zq-blog/ $BEAF_USER@$BEAF_HOST:/usr/web/zq-blog/deploy
 
 workflows:
   version: 2
@@ -61,5 +59,3 @@ workflows:
           filters:
             branches:
               only: master
-
-
