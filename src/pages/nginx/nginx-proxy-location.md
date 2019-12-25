@@ -61,6 +61,7 @@ location ~* \.(gif|jpg|jpeg)$ {
 ### 匹配以 user,product 开头的所有请求
 
 ```nginx
+# 如果要求必须包含至少一个长度 使用 ~* ^\/(user|product)\/.+
 location ~* ^\/(user|product)\/ {
 
 }
