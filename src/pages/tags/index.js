@@ -17,7 +17,7 @@ const TagsPage = ({
 }) => (
   <Layout sideBar={false} location={location} title={title}>
     <>
-      <h1>Tags</h1>
+      <h1>共 {group.length} 个页面标签</h1>
       <ul>
         {group
           .sort((a, b) => {
