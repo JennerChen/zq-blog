@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// Utilities
-import kebabCase from 'lodash/kebabCase'
-
 // Components
-import { Helmet } from 'react-helmet'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
+import Tag from '../../components/Tag'
+import Layout from '../../components/Layout'
 
 const TagsPage = ({
   data: {
@@ -15,22 +13,29 @@ const TagsPage = ({
       siteMetadata: { title },
     },
   },
+  location,
 }) => (
-  <div>
-    <Helmet title={title} />
-    <div>
+  <Layout sideBar={false} location={location} title={title}>
+    <>
       <h1>Tags</h1>
       <ul>
-        {group.map(tag => (
-          <li key={tag.fieldValue} label={ tag.fieldValue } count={ tag.totalCount }>
-            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
-            </Link>
-          </li>
-        ))}
+        {group
+          .sort((a, b) => {
+            if (a.totalCount - b.totalCount === 0) return 0
+            return a.totalCount - b.totalCount > 0 ? -1 : 1
+          })
+          .map(tag => (
+            <li key={tag.fieldValue}>
+              <Tag
+                alwaysShow={true}
+                label={tag.fieldValue}
+                count={tag.totalCount}
+              />
+            </li>
+          ))}
       </ul>
-    </div>
-  </div>
+    </>
+  </Layout>
 )
 
 TagsPage.propTypes = {
@@ -60,10 +65,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
-      limit: 2000
-    ) #            filter: { frontmatter: { published: { ne: false } } }
-    {
+    allMarkdownRemark(limit: 2000) {
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

@@ -110,6 +110,10 @@ const Slogan = styled.div`
   }
 `
 
+const MoreLink = styled(Link)`
+  color: #fff;
+`
+
 export default class extends Component {
   render() {
     let tags = (this.props.tags ? this.props.tags : []).sort((a, b) => {
@@ -145,6 +149,7 @@ export default class extends Component {
                 count={totalCount}
               />
             ))}
+            {tags.length > 20 ? <MoreLink to={`./tags`}>...</MoreLink> : null}
           </div>
 
           <Divider />
