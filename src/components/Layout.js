@@ -95,6 +95,7 @@ const IconButton = styled.a`
 
 class Footer extends React.Component {
   render() {
+    // icp 证 see: https://beian.aliyun.com/order/index.htm
     return (
       <FooterContainer>
         Follow me on{' '}
@@ -103,7 +104,14 @@ class Footer extends React.Component {
           target={'_blank'}
           title={'github'}
         >
-          <i className={'iconfont icon-github'}/>
+          <i className={'iconfont icon-github'} />
+        </IconButton>
+        <IconButton
+          href={`http://www.beian.miit.gov.cn`}
+          target={'_blank'}
+          title={`ICP证`}
+        >
+          ICP证:苏ICP备18010722号
         </IconButton>
       </FooterContainer>
     )
