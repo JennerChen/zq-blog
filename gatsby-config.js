@@ -5,6 +5,8 @@ module.exports = {
     description: '张庆 笔记 个人工作 张庆的个人工作笔记 博客 日志 技术 前端',
     siteUrl: 'https://zqblog.beaf.tech/',
     githubUrl: 'https://github.com/JennerChen/zq-blog/tree/master/src/pages',
+    homeUrl: `https://github.com/JennerChen`,
+    icpNumber: `苏ICP备18010722号`,
   },
   pathPrefix: '/',
   plugins: [
@@ -49,7 +51,7 @@ module.exports = {
           'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
-          'gatsby-remark-reading-time'
+          'gatsby-remark-reading-time',
         ],
       },
     },

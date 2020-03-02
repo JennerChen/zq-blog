@@ -9,6 +9,7 @@ import styled, {
 import LeftSidebar from './LeftSidebar'
 import { GlobalTheme } from '../utils/theme'
 import GoToTop from '../components/GoToTop'
+import Footer from './Footer'
 
 const Flex = styled.div`
   display: flex;
@@ -71,52 +72,6 @@ const GlobalStyle = createGlobalStyle`
         flex-shrink: 0;
     }
 `
-
-const FooterContainer = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  height: 100px;
-  line-height: 100px;
-`
-
-const IconButton = styled.a`
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: none;
-
-  color: #969696;
-  transition: all 0.3s;
-  margin-right: 1.2em;
-
-  & > i {
-    font-size: 2em;
-  }
-`
-
-class Footer extends React.Component {
-  render() {
-    // icp 证 see: https://beian.aliyun.com/order/index.htm
-    return (
-      <FooterContainer>
-        Follow me on{' '}
-        <IconButton
-          href={'https://github.com/JennerChen'}
-          target={'_blank'}
-          title={'github'}
-        >
-          <i className={'iconfont icon-github'} />
-        </IconButton>
-        <IconButton
-          href={`http://www.beian.miit.gov.cn`}
-          target={'_blank'}
-          title={`ICP证`}
-        >
-          ICP证:苏ICP备18010722号
-        </IconButton>
-      </FooterContainer>
-    )
-  }
-}
 
 class Layout extends React.Component {
   render() {
