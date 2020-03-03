@@ -1,0 +1,7 @@
+types:
+  fix:
+    ui: 'fix-ui'
+    default: 'fix-issue'
+  feat: 'feature'
+  docs: '新文章'
+  chore: 'project-config'
