@@ -103,9 +103,9 @@ Set 与 Array 的主要区别在于, Set 不允许重复, 是一种更严格的 
 Set 相较于 Map 实际应用场景较少，没有太大的优势。在实际业务中，一般用于排重
 
 ```javascript
-let arr = [😁,"a", "b", "c",😁, "a" ];
+let arr = ['😁', 'a', 'b', 'c', '😁', 'a']
 
-Array.from(new Set(arr)) // [😁,"a", "b", "c" ]
+Array.from(new Set(arr)) // ["😁","a", "b", "c" ]
 ```
 
 > Set 相较于 Array 性能稍差， 同理 Map 相较于 object 性能稍差。但是正常使用没有多大区别。 因为这些性能只能算是线性的 O(n+m)，而不是 O(n\*m)。
