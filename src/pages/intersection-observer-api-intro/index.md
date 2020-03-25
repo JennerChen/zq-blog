@@ -86,6 +86,8 @@ export default function App() {
 
 - [在 codesandbox 中打开](https://codesandbox.io/s/twilight-morning-jvnyw)
 
+> 相比于监听 window.scroll 事件, 是不是更简单, 更高大上？
+
 ## Reference
 
 - [MDN:Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
