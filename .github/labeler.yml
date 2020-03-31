@@ -1,5 +1,13 @@
 新文章:
   - src/pages/**/*
 
+ui:
+  - src/templates/**/*
+  - src/components/**/*
+  - src/utils/**/*
+
 chore:
   - ./*
+  - ./.github/**/*
+  - ./.circleci/**/*
+  - ./static/**/*
