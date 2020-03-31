@@ -137,8 +137,6 @@ export default class extends Component {
             <StyledLink to={'/'}>主页</StyledLink>
           </div>
 
-          {/*<Divider />*/}
-
           <div style={{ marginTop: '.6em' }}>
             {/*最多只显示20个*/}
             {tags.slice(0, 20).map(({ fieldValue, totalCount }) => (
