@@ -1,8 +1,8 @@
-workflow "New workflow" {
+workflow "Label Pull Request" {
   on = "push"
-  resolves = ["First interaction"]
+  resolves = ["Label Pull Request"]
 }
 
-action "First interaction" {
-  uses = "actions/first-interaction@b01f95e46968766d9daee3f385dd7867626ebe67"
+action "Label Pull Request" {
+  uses = "Labeler"
 }
