@@ -147,7 +147,7 @@ export default class extends Component {
                 count={totalCount}
               />
             ))}
-            {tags.length > 20 ? <MoreLink to={`./tags`}>...</MoreLink> : null}
+            {tags.length > 20 ? <MoreLink to={`/tags`}>...</MoreLink> : null}
           </div>
 
           <Divider />

@@ -101,7 +101,6 @@ export default class extends Component {
   handleWindowScroll = () => {
     let btnShouldHide = window.scrollY <= 100
 
-
     if (!btnShouldHide) {
       this.firstRun = false
     }
@@ -125,12 +124,7 @@ export default class extends Component {
 
     return (
       <Container hide={this.state.hide}>
-        <a
-          onClick={this.scrollToTop}
-          href="javascript:void(0)"
-          role="button"
-          aria-label="Scroll to top"
-        >
+        <a onClick={this.scrollToTop} role="button" aria-label="返回顶部">
           <svg
             height="48"
             viewBox="0 0 48 48"
