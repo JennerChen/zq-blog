@@ -35,15 +35,6 @@ export class DiscussionEmbed extends React.Component {
     blockByGFW: false,
   }
 
-  componentWillMount() {
-    if (
-      typeof window !== 'undefined' &&
-      window.disqus_shortname &&
-      window.disqus_shortname !== this.props.shortname
-    )
-      this.cleanInstance()
-  }
-
   componentDidMount() {
     this.loadInstance()
   }
@@ -62,12 +53,9 @@ export class DiscussionEmbed extends React.Component {
     return true
   }
 
-  componentWillUpdate(nextProps) {
-    if (this.props.shortname !== nextProps.shortname) this.cleanInstance()
-  }
-
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     this.loadInstance()
+    if (this.props.shortname !== prevProps.shortname) this.cleanInstance()
   }
 
   loadInstance() {
@@ -83,6 +71,13 @@ export class DiscussionEmbed extends React.Component {
           blockByGFW: true,
         })
       })
+
+    if (
+      typeof window !== 'undefined' &&
+      window.disqus_shortname &&
+      window.disqus_shortname !== this.props.shortname
+    )
+      this.cleanInstance()
   }
 
   _loadInstance() {
