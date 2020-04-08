@@ -93,28 +93,5 @@ export const pageQuery = graphql`
         }
       }
     }
-
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt(pruneLength: 240)
-          fields {
-            slug
-          }
-          timeToRead
-          frontmatter {
-            date(formatString: "YYYY-MM-DD")
-            title
-            tags
-            commentIdentifier
-          }
-        }
-      }
-
-      group(field: frontmatter___tags) {
-        fieldValue
-        totalCount
-      }
-    }
   }
 `
