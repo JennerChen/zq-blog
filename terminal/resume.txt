@@ -1,0 +1,3 @@
+<a class='blue' target='_blank' href='https://zqcv.beaf.tech/'>
+  View My Resume
+</a>

@@ -1,0 +1,27 @@
+<ul class="contact">
+  <li>
+     <a class="blue">
+         UI: React + styled-components
+     </a>
+    </li>
+  <li>
+     <a class="blue">
+         State management: React hooks
+     </a>
+  </li>
+  <li>
+    <a class="blue">
+        Build Tool: Gatsby
+    </a>
+  </li>
+  <li>
+    <a class="blue" target="_blank" href="https://github.com/JennerChen/zq-blog">
+        Source: https://github.com/JennerChen/zq-blog
+    </a>
+  </li>
+  <li>
+      <a class="blue" target="_blank" href="https://github.com/codebytere/codebytere.github.io">
+        Original Design: codebytere
+      </a>
+    </li>
+</ul>
