@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle, css, keyframes } from 'styled-components'
 import React from 'react'
 import ContentLoader from 'react-content-loader'
+import media from 'styled-media-query'
 const ErrorContainer = styled.div``
 
 export const ErrorMessage = ({ children }) => {
@@ -141,6 +142,23 @@ body {
   .green {
     color: green;
   }
+  
+  ${media.lessThan('medium')`
+      z-index: 9999;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      header {
+        display: none;
+      }
+
+      #terminal {
+        top: 0;
+      } 
+  `};
 }
 
 .command_input {
