@@ -2,4 +2,3 @@ mogul 基于 react + mobx + antd, 致力于 中台管理页面开发, 是 antd �
 <a class='blue' target='_blank' href='https://github.com/freshesx/mogul'>
   查看源代码
 </a>
- 与之 配套的 mogul-scripts 则是对 create-react-app 的补充, 提供更多企业级页面需要的工程化内容
