@@ -89,7 +89,13 @@ export const Provider = ({ children, files, basePath, onClose }) => {
           let targetFold = files.find(({ path }) => targetPath === path)
 
           if (targetFold) {
-            setPath(targetPath)
+            if (targetFold.content) {
+              message = (
+                <ErrorMessage>{args[0]} is not a valid directory </ErrorMessage>
+              )
+            } else {
+              setPath(targetPath)
+            }
           } else {
             // 目录不存在
             message = <ErrorMessage>not a valid directory </ErrorMessage>
