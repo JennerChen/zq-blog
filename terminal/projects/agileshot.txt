@@ -1,0 +1,4 @@
+安捷秀影视项目管理工具，影视方向项目进度管理工具
+<a class='blue' target='_blank' href='https://agileshot.vsochina.com/'>
+  查看项目
+</a>

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@gatsby-contrib/gatsby-plugin-elasticlunr-search": "^2.1.1",
+    "autosize": "^4.0.2",
     "babel-plugin-styled-components": "^1.10.0",
     "gatsby": "^2.20.11",
     "gatsby-plugin-baidu-analytics": "^1.1.16",
@@ -33,6 +34,7 @@
     "lodash": "^4.17.11",
     "prismjs": "^1.15.0",
     "react": "^16.13.1",
+    "react-content-loader": "^5.0.3",
     "react-dom": "^16.13.1",
     "react-github-corner": "^2.3.0",
     "react-helmet": "^5.2.0",

@@ -2031,6 +2031,11 @@ autoprefixer@^9.7.4:
     postcss "^7.0.27"
     postcss-value-parser "^4.0.3"
 
+autosize@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/autosize/-/autosize-4.0.2.tgz#073cfd07c8bf45da4b9fd153437f5bafbba1e4c9"
+  integrity sha512-jnSyH2d+qdfPGpWlcuhGiHmqBJ6g3X+8T+iRwFrHPLVcdoGJE/x6Qicm6aDHfTsbgZKxyV8UU/YB2p4cjKDRRA==
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -12286,6 +12291,11 @@ rc@^1.1.2, rc@^1.2.7, rc@^1.2.8:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-content-loader@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-5.0.3.tgz#2de797139a86be0418c83c4b71f68051c4bc409b"
+  integrity sha512-uEWQiTyGXgxJLuY+vZBngpVbFRSRciMMM30eXJ3QtgPN4wQx9uPHpxnmJoQjNXMyJIz7Bxyd/nrtkIdAMEeM+w==
 
 react-dev-utils@^4.2.3:
   version "4.2.3"

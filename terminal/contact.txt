@@ -1,0 +1,27 @@
+<ul class="contact">
+  <li>
+      <a class="blue" href="mailto:zhangqing332@live.com">
+        Email:zhangqing332@live.com
+      </a>
+    </li>
+  <li>
+    <a class="blue">
+      Tel:18112525542
+    </a>
+  </li>
+  <li>
+    <a class="blue">
+      Location:中国🇨🇳苏州
+    </a>
+  </li>
+  <li>
+      <a class="blue" target="_blank" href="https://github.com/JennerChen">
+        GitHub
+      </a>
+    </li>
+    <li>
+      <a class="blue" target="_blank" href="https://www.linkedin.com/in/zhangqing332/">
+        LinkedIn
+      </a>
+    </li>
+</ul>

@@ -1,0 +1,4 @@
+mogul-scripts 基于 create-react-app, 提供更多企业级页面需要的工程化内容。
+<a class='blue' target='_blank' href='https://github.com/freshesx/mogul-scripts'>
+  查看源代码
+</a>
