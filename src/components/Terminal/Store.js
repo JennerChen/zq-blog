@@ -8,13 +8,7 @@ import React, {
 } from 'react'
 import { Help, History, Path, Cat, Ls } from './commands'
 import { ErrorMessage } from './style'
-import { pathNav } from './utils'
-
-const getRandomId = function() {
-  return Math.random()
-    .toString(36)
-    .slice(6)
-}
+import { pathNav, getRandomId } from './utils'
 
 const Store = createContext({})
 
