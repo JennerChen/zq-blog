@@ -45,7 +45,7 @@ export default function({
     <>
       <Helmet
         htmlAttributes={{ lang: 'cn' }}
-        title={`我的命令行 |${siteMetadata.title}`}
+        title={`我的命令行 | ${siteMetadata.title}`}
         meta={[
           {
             name: 'description',
