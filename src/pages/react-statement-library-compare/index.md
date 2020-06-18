@@ -75,4 +75,32 @@ react 是单向数据流，如果使用了 mobx，mobx+react 就变成双向数�
 
 > mobx 与 redux 相比, mobx 像自动挡汽车 简单高效 redux 是手动挡汽车 有乐趣且极致。
 
+### apollo
+
+我唯一没有使用过的状态库, 因为 apollo 适合于 graphql 后端形式，非 graphql 形式无法体现优点
+
 ### recoil
+
+近期开源的状态管理框架，默认支持 react concurrent mode， 与 mobx 十分相似， 依然处于初期开发中
+
+> 个人较看好 mobx 类型双向绑定状态库, 其能大幅提高开发效率
+
+#### 优点
+
+- 极简 api, 5 分钟记忆所有 api
+- 默认性能很好
+- 支持 concurrent mode
+- facebook 官方状态库
+
+#### 缺点
+
+- 仍然在早期开发中，不稳定
+- 最低支持 react v6.13+ , 兼容性差
+
+## Reference
+
+- [react concurrent mode](https://reactjs.org/docs/concurrent-mode-intro.html)
+- [redux](https://github.com/reduxjs/redux)
+- [apollo](https://github.com/apollographql/apollo-client)
+- [mobx](https://github.com/mobxjs/mobx)
+- [recoil](https://github.com/facebookexperimental/Recoil)
