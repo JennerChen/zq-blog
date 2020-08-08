@@ -52,6 +52,16 @@ systemjs 的写法和 [`import`](https://developer.mozilla.org/en-US/docs/Web/Ja
 <script type="module" src="./index.js"></script>
 ```
 
+### 缺陷
+
+#### 深层依赖不可靠
+
+例如 styled-components 相对依赖 `react-is`, 必须显示声明依赖才可以使用,这无疑提高了开发成本
+
+#### 旧依赖解析不正确
+
+例如 plupload, 由于是旧版本，umd 模块解析会存在问题。 故需要额外的处理才能解析
+
 ## Reference
 
 - [Import maps](https://docs.google.com/document/d/1vFQzbmxg9ilpg8CT_P8roEYcpTfZ06Q5N4J9-ZQqqZo/edit): Import Maps v0.5 Implementation Design Doc
