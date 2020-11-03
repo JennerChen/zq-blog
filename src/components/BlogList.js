@@ -118,9 +118,9 @@ class PostBrief extends Component {
           }}
         />
         <div style={{ height: rhythm(0.3) }} />
-        {tags.map(tag => (
+        {tags ? tags.map(tag => (
           <Tag key={tag} label={tag} />
-        ))}
+        )) : null}
         {/*<TagList tags={tags} />*/}
         <PostContent dangerouslySetInnerHTML={{ __html: excerpt }} />
         <div>
