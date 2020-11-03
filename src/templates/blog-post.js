@@ -108,6 +108,7 @@ class BlogPostTemplate extends React.Component {
     const identifier = post.frontmatter.commentIdentifier
       ? post.frontmatter.commentIdentifier
       : post.frontmatter.title
+    const tags = post.frontmatter.tags ? post.frontmatter.tags : [];
     return (
       <Layout
         tags={this.props.data.allMarkdownRemark.group}
@@ -116,7 +117,7 @@ class BlogPostTemplate extends React.Component {
         meta={[
           { name: 'description', content: siteMetadata.title },
           { name: 'description', content: siteMetadata.description },
-          { name: 'description', content: post.frontmatter.tags.join(' ') },
+          { name: 'description', content: tags.join(' ') },
           { name: 'description', content: post.excerpt },
         ]}
         theme={this.state.mode}
@@ -134,7 +135,7 @@ class BlogPostTemplate extends React.Component {
           <PublishDate>{post.frontmatter.date}</PublishDate>
           <ReadingTimeEst>约{post.timeToRead}分钟阅读</ReadingTimeEst>
 
-          {post.frontmatter.tags.map(tag => (
+          {tags.map(tag => (
             <Tag key={tag} label={tag} />
           ))}
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
