@@ -1,7 +1,7 @@
 ---
 title: algebraic effects 是什么
 date: '2020-11-10'
-tags: [react, javascript]
+tags: [react, js]
 ---
 
 ## 前言
