@@ -99,7 +99,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `张庆的笔记`,
-        short_name: `博客`,
+        short_name: `张庆的笔记`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
@@ -107,7 +107,6 @@ module.exports = {
         icon: `src/assets/beaf.logo.png`,
       },
     },
-    //    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
     {
@@ -116,5 +115,6 @@ module.exports = {
         pathToConfigModule: 'src/utils/typography',
       },
     },
+    `gatsby-plugin-offline`
   ],
 }
