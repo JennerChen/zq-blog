@@ -22,3 +22,10 @@ tags: ['闲聊']
 - 轮子已经完善，开箱即用
 
 > 相较于老东家，新东家每天都是忙忙碌碌的。工作都是充实的，业务压力山大。挑战与机遇并存
+
+
+
+## Reference
+
+- [Why You WANT To Work At FAANG](https://www.youtube.com/watch?v=nlwpWzJvcW4)
+- [Why You Don't Want To Work In FANG](https://www.youtube.com/watch?v=twKrik7KY6Y)
