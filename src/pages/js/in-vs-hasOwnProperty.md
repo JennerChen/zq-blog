@@ -64,7 +64,19 @@ child.hasOwnProperty('childProp'); // false
 child.hasOwnProperty('baseProp'); // false
 ```
 
-主要区别
+主要区别如下表
+||in|hasOwnProperty|
+|--|--|--|
+|Symbols| ✅ | ✅ 
+| inherited properties | ✅ | ❌
+| es6 getter/setters |  ✅ |  ❌
+
+## 应用场景
+
+`in` 更适合获取是否有方法的对象，通常来说， 你希望检查之后， 直接执行这个方法，用于检测方法是否存在。
+`hasOwnProperty` 适合plain object, 查看对象是否真正存在， 在业务场景中更适用。
+
+> 这就能解释，为什么大量底层库均适用`in`而不是`hasOwnProperty`。 越抽象的库，往往数据间交互已经不是plain object, 而是封装class对象了
 
 ## Reference
 
