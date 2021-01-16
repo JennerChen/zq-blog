@@ -51,6 +51,7 @@ const MarkDownContainer = styled.div`
 	.mermaid {
 		display: flex;
 		justify-content: center;
+    background-color: #fff;
 	}
 
   ${media.greaterThan('large')`
