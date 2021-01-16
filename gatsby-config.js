@@ -53,6 +53,19 @@ module.exports = {
               className: `gatsby-remark-link`,
             },
           },
+          {
+            resolve: 'gatsby-remark-mermaid',
+            options: {
+              theme: 'default',
+              viewport : {height: 800, width: 800},
+              mermaidOptions: {
+                themeCSS: `
+                  foreignObject { line-height: 19px; }
+                  foreignObject div { line-height: 19px; };
+                `
+              }
+            }
+          },
           'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
