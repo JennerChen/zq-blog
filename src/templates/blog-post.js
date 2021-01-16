@@ -47,6 +47,12 @@ const MarkDownContainer = styled.div`
   padding: ${rhythm(1)};
   width: 100%;
 
+
+	.mermaid {
+		display: flex;
+		justify-content: center;
+	}
+
   ${media.greaterThan('large')`
       max-width: ${rhythm(38)};
       padding: ${rhythm(1)};
@@ -108,7 +114,7 @@ class BlogPostTemplate extends React.Component {
     const identifier = post.frontmatter.commentIdentifier
       ? post.frontmatter.commentIdentifier
       : post.frontmatter.title
-    const tags = post.frontmatter.tags ? post.frontmatter.tags : [];
+    const tags = post.frontmatter.tags ? post.frontmatter.tags : []
     return (
       <Layout
         tags={this.props.data.allMarkdownRemark.group}
