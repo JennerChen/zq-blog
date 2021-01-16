@@ -12,3 +12,4 @@ Or [view the live demo here](https://gatsby-starter-blog-demo.netlify.com/).
 
 ## Build
 `gatsby build`
+
