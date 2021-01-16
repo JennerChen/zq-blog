@@ -45,6 +45,7 @@ const PostContent = styled.p`
   font-size: 1em;
   position: relative;
   overflow: hidden;
+
   &::after {
     content: '';
     position: absolute;
@@ -60,7 +61,7 @@ const HomeNotesListContainer = styled.div.attrs({
   id: 'posts',
 })`
   margin: 0 auto;
-  padding: ${rhythm(1)};
+  padding: ${rhythm(0.5)};
   width: 100%;
   position: relative;
   ${media.greaterThan('large')`
@@ -99,7 +100,6 @@ class PostBrief extends Component {
     } = this.props
 
     const identifier = commentIdentifier ? commentIdentifier : title
-
     return (
       <PostContainer>
         <PostTitle>
@@ -118,10 +118,7 @@ class PostBrief extends Component {
           }}
         />
         <div style={{ height: rhythm(0.3) }} />
-        {tags ? tags.map(tag => (
-          <Tag key={tag} label={tag} />
-        )) : null}
-        {/*<TagList tags={tags} />*/}
+        {tags ? tags.map(tag => <Tag key={tag} label={tag} />) : null}
         <PostContent dangerouslySetInnerHTML={{ __html: excerpt }} />
         <div>
           <PostNavButton onClick={() => navigate(slug)}>阅读</PostNavButton>
