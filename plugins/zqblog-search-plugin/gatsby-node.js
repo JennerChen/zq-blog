@@ -29,6 +29,7 @@ const myQuery = `{
 
 exports.onPostBuild = async function({ graphql }, config) {
   if (skipIndexing === true) {
+    report.panic('no valid algolia config inject, skip Indexing ')
     return
   }
 
@@ -50,6 +51,8 @@ exports.onPostBuild = async function({ graphql }, config) {
     )
 
     await index.saveObjects(indexedData)
+
+    report.success(`index successfully to ${ indexName.toUpperCase() }`)
   } catch (err) {
     report.panic('failed to index to Algolia', err)
   }

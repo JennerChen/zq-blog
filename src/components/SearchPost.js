@@ -1,5 +1,4 @@
 import React, { Component, createRef } from 'react'
-import { Index } from 'elasticlunr'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { InstantSearch, SearchBox, connectHits } from 'react-instantsearch-dom'
@@ -156,12 +155,6 @@ export default class BoxInner extends Component {
       }
     }
   }
-
-  getOrCreateIndex = () =>
-    this.index
-      ? this.index
-      : // Create an elastic lunr index and hydrate with graphql query results
-        Index.load(this.props.data)
 
   showHints = () => {
     this.setState({
