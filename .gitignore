@@ -71,3 +71,6 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+.env.algolia.development
+.env.algolia.production

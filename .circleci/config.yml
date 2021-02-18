@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:14
 
     working_directory: ~/repo
 
@@ -32,7 +32,9 @@ jobs:
             libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
             libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 \
             ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget --fix-missing
-      # run tests!
+      # search index
+      - run: echo ALGOLIA_APP_ID=$ALGOLIA_APP_ID "\n" ALGOLIA_API_KEY=$ALGOLIA_API_KEY "\n" ALGOLIA_SEARCH_API_KEY=$ALGOLIA_SEARCH_API_KEY "\n" ALGOLIA_INDEX_NAME=$ALGOLIA_INDEX_NAME "\n" > .env.algolia.production
+
       - run: yarn run build
 
       - run: mv public zq-blog

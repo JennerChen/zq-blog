@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.algolia.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: '张庆的笔记',
@@ -57,14 +61,14 @@ module.exports = {
             resolve: 'gatsby-remark-mermaid',
             options: {
               theme: 'default',
-              viewport : {height: 800, width: 800},
+              viewport: { height: 800, width: 800 },
               mermaidOptions: {
                 themeCSS: `
                   foreignObject { line-height: 19px; }
                   foreignObject div { line-height: 19px; };
-                `
-              }
-            }
+                `,
+              },
+            },
           },
           'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
@@ -74,21 +78,7 @@ module.exports = {
       },
     },
     {
-      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
-      options: {
-        // Fields to index
-        fields: [`title`, `tags`],
-        // How to resolve each field`s value for a supported node type
-        resolvers: {
-          // For any node of type MarkdownRemark, list how to resolve the fields` values
-          MarkdownRemark: {
-            title: node => node.frontmatter.title,
-            tags: node => node.frontmatter.tags,
-            slug: node => node.fields.slug,
-            //            path: node => node.frontmatter.path,
-          },
-        },
-      },
+      resolve: `zqblog-search-plugin`,
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -130,7 +120,7 @@ module.exports = {
     },
     // offline 插件在chrome中存在缓存bug, 当前无精力修复，暂时移除 #39
     // https://github.com/JennerChen/zq-blog/issues/39
-//    `gatsby-plugin-offline`,
-    `gatsby-plugin-remove-serviceworker`
+    //    `gatsby-plugin-offline`,
+    `gatsby-plugin-remove-serviceworker`,
   ],
 }
