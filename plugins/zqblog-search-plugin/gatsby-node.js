@@ -29,7 +29,7 @@ const myQuery = `{
 
 exports.onPostBuild = async function({ graphql }, config) {
   if (skipIndexing === true) {
-    report.panic('no valid algolia config inject, skip Indexing ')
+    report.info('no valid algolia config inject, skip Indexing ')
     return
   }
 
