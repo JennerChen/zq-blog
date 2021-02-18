@@ -2,6 +2,11 @@ require('dotenv').config({
   path: `.env.algolia.${process.env.NODE_ENV}`,
 })
 
+
+const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID
+const ALGOLIA_SEARCH_API_KEY = process.env.ALGOLIA_SEARCH_API_KEY
+const ALGOLIA_INDEX_NAME = process.env.ALGOLIA_INDEX_NAME
+
 module.exports = {
   siteMetadata: {
     title: '张庆的笔记',
@@ -11,6 +16,9 @@ module.exports = {
     githubUrl: 'https://github.com/JennerChen/zq-blog/tree/master/src/pages',
     homeUrl: `https://github.com/JennerChen`,
     icpNumber: `苏ICP备18010722号`,
+    ALGOLIA_APP_ID,
+    ALGOLIA_SEARCH_API_KEY,
+    ALGOLIA_INDEX_NAME
   },
   pathPrefix: '/',
   plugins: [

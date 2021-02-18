@@ -1,13 +1,9 @@
 import React, { Component, createRef } from 'react'
-import { Link } from 'gatsby'
+import { Link, StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import { InstantSearch, SearchBox, connectHits } from 'react-instantsearch-dom'
 import algoliasearch from 'algoliasearch'
 import Tag from './Tag'
-
-const appId = process.env.ALGOLIA_APP_ID
-const apiKey = process.env.ALGOLIA_SEARCH_API_KEY
-const indexName = process.env.ALGOLIA_INDEX_NAME
 
 const SearchBoxContainer = styled.div`
   position: sticky;
@@ -94,7 +90,7 @@ const SearchArticleItem = styled.div`
   }
 `
 
-const CustomHits = connectHits(function({ hits = [] }) {
+const CustomHits = connectHits(function({ hits = [], ...rest }) {
   return (
     <PopupLayer>
       {hits.map(({ objectID, slug, tags, title }) => (
@@ -117,7 +113,7 @@ const CustomHits = connectHits(function({ hits = [] }) {
   )
 })
 
-export default class BoxInner extends Component {
+class BoxInner extends Component {
   constructor(props) {
     super(props)
     this.container = createRef()
@@ -130,6 +126,7 @@ export default class BoxInner extends Component {
   }
 
   componentDidMount() {
+    const { appId, apiKey } = this.props
     this.setState({
       client: algoliasearch(appId, apiKey),
     })
@@ -170,6 +167,7 @@ export default class BoxInner extends Component {
 
   render() {
     const { overlay, client } = this.state
+    const { indexName } = this.props
 
     if (!client) {
       return null
@@ -197,4 +195,39 @@ export default class BoxInner extends Component {
       </SearchBoxContainer>
     )
   }
+}
+
+export default function() {
+  return (
+    <StaticQuery
+      query={graphql`
+        query {
+          site {
+            siteMetadata {
+              ALGOLIA_APP_ID
+              ALGOLIA_SEARCH_API_KEY
+              ALGOLIA_INDEX_NAME
+            }
+          }
+        }
+      `}
+      render={({
+        site: {
+          siteMetadata: {
+            ALGOLIA_APP_ID,
+            ALGOLIA_SEARCH_API_KEY,
+            ALGOLIA_INDEX_NAME,
+          },
+        },
+      }) => {
+        return (
+          <BoxInner
+            appId={ALGOLIA_APP_ID}
+            apiKey={ALGOLIA_SEARCH_API_KEY}
+            indexName={ALGOLIA_INDEX_NAME}
+          />
+        )
+      }}
+    />
+  )
 }
