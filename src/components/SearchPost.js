@@ -111,9 +111,7 @@ const CustomHits = connectHits(function({ hits = [] }) {
       ))}
 
       {hits.length === 0 ? (
-        <p style={{ textAlign: 'center', margin: '20px 0' }}>
-          找不到&nbsp;&nbsp; &nbsp;&nbsp;的结果
-        </p>
+        <p style={{ textAlign: 'center', margin: '20px 0' }}>找不到的结果</p>
       ) : null}
     </PopupLayer>
   )
