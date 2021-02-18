@@ -78,24 +78,6 @@ module.exports = {
       },
     },
     {
-      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
-      options: {
-        // Fields to index
-        fields: [`title`, `tags`],
-        // How to resolve each field`s value for a supported node type
-        resolvers: {
-          // For any node of type MarkdownRemark, list how to resolve the fields` values
-          MarkdownRemark: {
-            title: node => node.frontmatter.title,
-            tags: node => node.frontmatter.tags,
-            slug: node => node.fields.slug,
-            //            path: node => node.frontmatter.path,
-          },
-        },
-      },
-    },
-    {
-      // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
       resolve: `zqblog-search-plugin`,
     },
     `gatsby-transformer-sharp`,
