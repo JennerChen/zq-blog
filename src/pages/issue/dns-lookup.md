@@ -9,6 +9,8 @@ tags: ['dns']
 ```
 https://dns.google/resolve?name=google.com&type=A
 ```
+国内可以访问 https://tool.chinaz.com/dns/ 查询
+
 
 ## Reference 
 
