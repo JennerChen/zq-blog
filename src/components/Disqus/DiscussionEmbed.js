@@ -140,7 +140,8 @@ export class DiscussionEmbed extends React.Component {
             </a>
             , 评论系统无法使用。
             <p>
-              你可以使用vpn代理域名 <code>*.disqus.com</code>下所有请求, 然后
+              你可以使用vpn代理或者调整host域名 <code>*.disqus.com</code>
+              下所有请求, 然后
               <a
                 href={'javascript:void(0);'}
                 onClick={() => this.loadInstance()}
