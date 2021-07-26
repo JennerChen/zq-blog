@@ -39,7 +39,6 @@ const ReadingTimeEst = styled.span`
   color: #969696;
   padding-right: 1em;
   margin-right: 1em;
-  border-right: 1px solid #969696;
 `
 
 const MarkDownContainer = styled.div`
