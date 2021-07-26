@@ -6,7 +6,7 @@ import React, {
   useRef,
   useEffect,
 } from 'react'
-import { Help, History, Path, Cat, Ls } from './commands'
+import { Help, History, Path, Cat, Ls, Exit } from './commands'
 import { ErrorMessage } from './style'
 import { pathNav, getRandomId } from './utils'
 
@@ -161,6 +161,12 @@ export const Provider = ({ children, files, basePath, onClose }) => {
           addCommand({
             command: commandStr,
             message: <Ls files={currFoldFiles} />,
+          })
+          break
+        case 'exit':
+          addCommand({
+            command: commandStr,
+            message: <Exit />,
           })
           break
         default:

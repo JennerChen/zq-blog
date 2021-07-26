@@ -23,6 +23,9 @@ export default function() {
         <li>
           <strong>clear</strong> - clear current window
         </li>
+        <li>
+          <strong>exit</strong> - exit terminal
+        </li>
       </ul>
     </div>
   )
