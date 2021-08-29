@@ -94,3 +94,9 @@ https://github.com/JennerChen/my-custom-react-hooks/blob/1.0.0/src/myRender.js#L
 
 `react-reconciler` 可以帮助开发者高度定制 render 方法，用于一些非传统 web 环境，例如 terminal, hardware iot. 但在使用过程中，也会遇到很多问题，基于
 时间不够充分，只能见招拆招，不能深入理解。 下个月会出一个自定义 react hooks 的能力， 实现一个简易版本 react
+
+> 本次所有代码仓库: https://github.com/JennerChen/my-custom-react-hooks
+
+## Reference
+
+- [react-reconciler](https://github.com/facebook/react/tree/main/packages/react-reconciler)
