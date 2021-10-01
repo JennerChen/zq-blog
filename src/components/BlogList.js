@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 import { Link, navigate } from 'gatsby'
 import { rhythm } from '../utils/typography'
@@ -6,6 +6,8 @@ import { Component } from 'react'
 import PostNavButton from './PostNavButton'
 import React from 'react'
 import Tag from '../components/Tag'
+import { switchProp } from 'styled-tools'
+
 import { CommentCount } from '../components/Disqus'
 
 const PostTitle = styled.h3`
@@ -41,20 +43,41 @@ const PostContainer = styled.div`
 `
 
 const PostContent = styled.p`
-  color: #333;
   font-size: 1em;
   position: relative;
   overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(rgba(255, 255, 255, 0), white);
-  }
+  ${switchProp('theme.mode', {
+    dark: css`
+      //color: #fff;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          rgba(255, 255, 255, 0),
+          var(--BLOG-BACKGROUND-COLOR)
+        );
+      }
+    `,
+    light: css`
+      //color: #333;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          rgba(255, 255, 255, 0),
+          var(--BLOG-BACKGROUND-COLOR)
+        );
+      }
+    `,
+  })}
 `
 
 const HomeNotesListContainer = styled.div.attrs({
