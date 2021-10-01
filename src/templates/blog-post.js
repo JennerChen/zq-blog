@@ -8,7 +8,6 @@ import { rhythm } from '../utils/typography'
 import CopyRightInfo from '../components/CopyRightInfo'
 import { DiscussionEmbed } from '../components/Disqus'
 import Tag from '../components/Tag'
-import DayNightSwitch from '../components/DayNightSwitch'
 import EditOnGithub from '../components/EditOnGithub'
 const PostTitle = styled.h1`
   line-height: 1em;
@@ -82,28 +81,6 @@ class PostContent extends React.PureComponent {
 }
 
 class BlogPostTemplate extends React.Component {
-  state = {
-    mode: 'light',
-  }
-
-  componentDidMount() {
-    // ssr 不会执行
-    if (
-      localStorage.getItem('theme') &&
-      localStorage.getItem('theme') !== this.state.mode
-    ) {
-      console.log(`use theme ${this.state.mode}`)
-      this.setState({
-        mode: localStorage.getItem('theme'),
-      })
-    }
-  }
-
-  toggleDarkMode = bool => {
-    localStorage.setItem('theme', bool ? 'light' : 'dark')
-    this.setState({ mode: bool ? 'light' : 'dark' })
-  }
-
   render() {
     const post = this.props.data.markdownRemark
     const siteMetadata = this.props.data.site.siteMetadata
@@ -126,16 +103,8 @@ class BlogPostTemplate extends React.Component {
           { name: 'description', content: tags.join(' ') },
           { name: 'description', content: post.excerpt },
         ]}
-        theme={this.state.mode}
+        extraHeader={<EditOnGithub slug={this.props.pageContext.slug} />}
       >
-        <div>
-          <DayNightSwitch
-            checked={this.state.mode === 'light'}
-            onChange={val => this.toggleDarkMode(val)}
-          />
-
-          <EditOnGithub slug={this.props.pageContext.slug} />
-        </div>
         <MarkDownContainer>
           <PostTitle>{post.frontmatter.title}</PostTitle>
           <PublishDate>{post.frontmatter.date}</PublishDate>

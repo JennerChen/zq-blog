@@ -10,6 +10,7 @@ import LeftSidebar from './LeftSidebar'
 import { GlobalTheme } from '../utils/theme'
 import GoToTop from '../components/GoToTop'
 import Footer from './Footer'
+import DayNightSwitch from './DayNightSwitch'
 
 const Flex = styled.div`
   display: flex;
@@ -22,11 +23,11 @@ const Content = styled.div`
   flex: 1;
   flex-shrink: 0;
   transition: background-color 0.3s;
-
+  overflow: auto;
   ${switchProp('theme.mode', {
     dark: css`
-      background-color: #27221a;
-      color: #f6e6cc;
+      --BLOG-BACKGROUND-COLOR: #27221a;
+      --BLOG-COLOR: #f6e6cc;
 
       & a {
         color: #ba832c;
@@ -48,8 +49,19 @@ const Content = styled.div`
       code[class*='language-'] {
         color: #f95d5d;
       }
+
+      table tr td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
     `,
-  })}
+    light: css`
+      --BLOG-BACKGROUND-COLOR: #fff;
+      --BLOG-COLOR: #333;
+    `,
+  })};
+
+  background-color: var(--BLOG-BACKGROUND-COLOR);
+  color: var(--BLOG-COLOR);
 `
 
 const GlobalStyle = createGlobalStyle`
@@ -71,14 +83,61 @@ const GlobalStyle = createGlobalStyle`
         width: 100%;
         flex-shrink: 0;
     }
+    
+    a[href] {
+        cursor: pointer;
+        text-decoration: currentColor;
+    }
 `
 
 class Layout extends React.Component {
+  state = {
+    mode: 'light',
+  }
+
+  componentDidMount() {
+    // ssr 不会执行
+    if (localStorage.getItem('theme')) {
+      this.setState({
+        mode: localStorage.getItem('theme'),
+      })
+
+      return
+    }
+
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)')
+    ) {
+      let mode = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+      this.setState({
+        mode,
+      })
+    }
+  }
+
+  toggleDarkMode = bool => {
+    localStorage.setItem('theme', bool ? 'light' : 'dark')
+    this.setState({ mode: bool ? 'light' : 'dark' })
+  }
+
   render() {
-    const { title, children, tags, sideBar, meta, theme } = this.props
+    const {
+      title,
+      children,
+      tags,
+      sideBar,
+      meta,
+      extraHeader,
+      headerClassName,
+    } = this.props
+
+    const { mode } = this.state
 
     return (
-      <ThemeProvider theme={{ mode: theme }}>
+      <ThemeProvider theme={{ mode }}>
         <Fragment>
           <GlobalStyle />
           <GlobalTheme />
@@ -89,9 +148,17 @@ class Layout extends React.Component {
               href={'//at.alicdn.com/t/font_585271_t86bw1k535.css'}
             />
           </Helmet>
-          <Flex style={{ minHeight: '100%' }}>
+          <Flex style={{ minHeight: '100%', height: '100%' }}>
             {sideBar ? <LeftSidebar tags={tags} /> : null}
             <Content>
+              <div className={headerClassName}>
+                <DayNightSwitch
+                  checked={this.state.mode === 'light'}
+                  onChange={val => this.toggleDarkMode(val)}
+                />
+
+                {extraHeader ? extraHeader : null}
+              </div>
               {children}
               <Footer />
             </Content>
@@ -105,7 +172,6 @@ class Layout extends React.Component {
 
 Layout.defaultProps = {
   sideBar: true,
-  theme: 'light',
 }
 
 export default Layout
