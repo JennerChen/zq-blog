@@ -24,6 +24,7 @@ const Content = styled.div`
   flex-shrink: 0;
   transition: background-color 0.3s;
   overflow: auto;
+  overscroll-behavior: contain;
   ${switchProp('theme.mode', {
     dark: css`
       --BLOG-BACKGROUND-COLOR: #27221a;

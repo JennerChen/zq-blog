@@ -29,7 +29,9 @@ const Container = styled.div`
   padding: ${rhythm(1.5)} ${rhythm(1)};
   flex-direction: column;
   position: relative;
+  overflow: auto;
 
+  overscroll-behavior-y: contain;
   ${media.lessThan('large')`
     display: none;
   `};
