@@ -68,6 +68,7 @@ const Content = styled.div`
 const GlobalStyle = createGlobalStyle`
     html{
         height: 100%;
+        overflow-y: hidden;
     };
     
     body, #___gatsby{
