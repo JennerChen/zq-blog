@@ -19,7 +19,7 @@ exports.createPages = ({ graphql, actions }) => {
               sort: { fields: [frontmatter___date], order: DESC }
               limit: 1000
               filter: {
-                fileAbsolutePath: {regex: "${ pagesFold }"}
+                fileAbsolutePath: {glob: "**/src/pages/**"}
               }
             ) {
               edges {
