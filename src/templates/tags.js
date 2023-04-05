@@ -27,11 +27,6 @@ const Tags = ({ pageContext, data, location }) => {
         }
         posts={edges}
       />
-      {/*
-              This links to a page that does not yet exist.
-              We'll come back to it!
-            */}
-      {/*<Link to="/tags">All tags</Link>*/}
     </Layout>
   )
 }
