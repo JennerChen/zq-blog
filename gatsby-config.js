@@ -21,10 +21,9 @@ module.exports = {
   },
   pathPrefix: '/',
   plugins: [
-//    {
-//      resolve: `gatsby-plugin-styled-components`,
-//      options: {},
-//    },
+    {
+      resolve: `zqblog-styled-components-plugin`,
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
