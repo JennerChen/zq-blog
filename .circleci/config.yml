@@ -5,6 +5,7 @@ jobs:
   build:
     docker:
       - image: cimg/node:14.15.5-browsers
+    resource_class: large
 
     working_directory: ~/repo
 
