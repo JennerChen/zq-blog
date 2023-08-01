@@ -10,7 +10,7 @@
     </a>
   </li>
   <li>
-    <a class="blue">
+    <a class="blue" target="_blank" href="https://www.google.com/maps/place/Suzhou,+Jiangsu,+China">
       Location:中国🇨🇳苏州
     </a>
   </li>
