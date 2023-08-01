@@ -12,6 +12,7 @@ module.exports = {
     author: '张庆',
     description: '张庆 笔记 个人工作 张庆的个人工作笔记 博客 日志 技术 前端',
     siteUrl: 'https://zqblog.beaf.tech/',
+    siteOgUrl: 'https://zqblog.beaf.tech',
     githubUrl: 'https://github.com/JennerChen/zq-blog/tree/master/src/pages',
     homeUrl: `https://github.com/JennerChen`,
     icpNumber: `苏ICP备18010722号`,
@@ -153,6 +154,7 @@ module.exports = {
         ],
       },
     },
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -164,6 +166,9 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/assets/beaf.logo.png`,
       },
+    },
+    {
+      resolve: 'zqblog-og-plugin',
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
