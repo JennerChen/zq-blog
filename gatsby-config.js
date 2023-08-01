@@ -22,10 +22,10 @@ module.exports = {
   },
   pathPrefix: '/',
   plugins: [
-    {
-      resolve: `gatsby-plugin-styled-components`,
-      options: {},
-    },
+//    {
+//      resolve: `gatsby-plugin-styled-components`,
+//      options: {},
+//    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

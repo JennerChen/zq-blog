@@ -59,7 +59,7 @@ const SearchIcon = styled.svg.attrs({
   vertical-align: middle;
 `
 
-export default function({ data, location }) {
+export default function dns({ data, location }) {
   const [domainStr, setDomain] = useState('')
 
   const domain = useMemo(() => {
