@@ -5,7 +5,7 @@
       </a>
     </li>
   <li>
-    <a class="blue">
+    <a class="blue" href="tel:18112525542">
       Tel:18112525542
     </a>
   </li>
