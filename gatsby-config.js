@@ -2,7 +2,6 @@ require('dotenv').config({
   path: `.env.algolia.${process.env.NODE_ENV}`,
 })
 
-
 const ALGOLIA_APP_ID = process.env.ALGOLIA_APP_ID
 const ALGOLIA_SEARCH_API_KEY = process.env.ALGOLIA_SEARCH_API_KEY
 const ALGOLIA_INDEX_NAME = process.env.ALGOLIA_INDEX_NAME
@@ -13,18 +12,18 @@ module.exports = {
     author: '张庆',
     description: '张庆 笔记 个人工作 张庆的个人工作笔记 博客 日志 技术 前端',
     siteUrl: 'https://zqblog.beaf.tech/',
+    siteOgUrl: 'https://zqblog.beaf.tech',
     githubUrl: 'https://github.com/JennerChen/zq-blog/tree/master/src/pages',
     homeUrl: `https://github.com/JennerChen`,
     icpNumber: `苏ICP备18010722号`,
     ALGOLIA_APP_ID,
     ALGOLIA_SEARCH_API_KEY,
-    ALGOLIA_INDEX_NAME
+    ALGOLIA_INDEX_NAME,
   },
   pathPrefix: '/',
   plugins: [
     {
-      resolve: `gatsby-plugin-styled-components`,
-      options: {},
+      resolve: `zqblog-styled-components-plugin`,
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -90,22 +89,18 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-     {
+    {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
-        trackingIds: [
-          "UA-131289526-1",
-          "G-SC3S920350"
-        ],
+        trackingIds: ['UA-131289526-1', 'G-SC3S920350'],
         // This object gets passed directly to the gtag config command
         // This config will be shared across all trackingIds
-        gtagConfig: {
-        },
+        gtagConfig: {},
         // This object is used for configuration specific to this plugin
         pluginConfig: {
           // Puts tracking script in the head instead of the body
-          head: false
+          head: false,
         },
       },
     },
@@ -118,7 +113,48 @@ module.exports = {
         head: false,
       },
     },
-    `gatsby-plugin-feed`,
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        feeds: [
+          {
+            output: '/rss.xml',
+            title: '张庆的笔记',
+            query: `
+              {
+                allMarkdownRemark(
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                ) {
+                  nodes {
+                    excerpt
+                    html
+                    fields {
+                      slug
+                    }
+                    frontmatter {
+                      title
+                      date
+                    }
+                  }
+                }
+              }
+            `,
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.nodes.map(node => {
+                return Object.assign({}, node.frontmatter, {
+                  description: node.excerpt,
+                  date: node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                  custom_elements: [{ 'content:encoded': node.html }],
+                })
+              })
+            },
+          },
+        ],
+      },
+    },
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -130,6 +166,9 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/assets/beaf.logo.png`,
       },
+    },
+    {
+      resolve: 'zqblog-og-plugin',
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,

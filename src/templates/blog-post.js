@@ -9,6 +9,8 @@ import CopyRightInfo from '../components/CopyRightInfo'
 import { DiscussionEmbed } from '../components/Disqus'
 import Tag from '../components/Tag'
 import EditOnGithub from '../components/EditOnGithub'
+//import LogoImage from '../assets/beaf.logo.png';
+
 const PostTitle = styled.h1`
   line-height: 1em;
   transition: all 0.3s;
@@ -86,23 +88,36 @@ class BlogPostTemplate extends React.Component {
     const siteMetadata = this.props.data.site.siteMetadata
     const siteTitle = siteMetadata.title
     const original = post.frontmatter.original
-    const { previous, next } = this.props.pageContext
+    const { previous, next, slug } = this.props.pageContext
     const title = `${post.frontmatter.title} | ${siteTitle}`
     const identifier = post.frontmatter.commentIdentifier
       ? post.frontmatter.commentIdentifier
       : post.frontmatter.title
     const tags = post.frontmatter.tags ? post.frontmatter.tags : []
+    const meta = [
+      { name: 'description', content: siteMetadata.title },
+      { name: 'description', content: siteMetadata.description },
+      { name: 'description', content: tags.join(' ') },
+      { name: 'description', content: post.excerpt },
+      {
+        property: 'og:url',
+        content: siteMetadata.siteOgUrl + slug,
+      },
+      {
+        property: 'og:title',
+        content: title,
+      },
+      {
+        property: 'og:description',
+        content: post.excerpt || tags.join(' '),
+      },
+    ]
     return (
       <Layout
         tags={this.props.data.allMarkdownRemark.group}
         location={this.props.location}
         title={title}
-        meta={[
-          { name: 'description', content: siteMetadata.title },
-          { name: 'description', content: siteMetadata.description },
-          { name: 'description', content: tags.join(' ') },
-          { name: 'description', content: post.excerpt },
-        ]}
+        meta={meta}
         extraHeader={<EditOnGithub slug={this.props.pageContext.slug} />}
       >
         <MarkDownContainer>
@@ -165,6 +180,7 @@ export const pageQuery = graphql`
         title
         author
         description
+        siteOgUrl
       }
     }
 

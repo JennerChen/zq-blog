@@ -52,7 +52,7 @@ Tags.propTypes = {
   }),
 }
 
-export default class extends Component {
+export default class TagList extends Component {
   render() {
     const { pageContext, data, location } = this.props
     const { tag } = pageContext

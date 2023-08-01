@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+//import styled, { StyleSheetManager } from 'styled-components';
 import BlogList from '../components/BlogList'
 import Layout from '../components/Layout'
 import SearchPost from '../components/SearchPost'

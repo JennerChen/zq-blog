@@ -3,7 +3,7 @@ import { graphql, navigate } from 'gatsby'
 import Terminal from '../../components/Terminal'
 import Helmet from 'react-helmet'
 
-export default function({
+export default function myCli({
   data: {
     allFile,
     site: { siteMetadata },
