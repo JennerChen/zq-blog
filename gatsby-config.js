@@ -180,7 +180,7 @@ module.exports = {
     },
     // offline 插件在chrome中存在缓存bug, 当前无精力修复，暂时移除 #39
     // https://github.com/JennerChen/zq-blog/issues/39
-    //    `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
     `gatsby-plugin-remove-serviceworker`,
   ],
 }
