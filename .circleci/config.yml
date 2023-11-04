@@ -62,7 +62,7 @@ jobs:
           at: ~/repo
       - add_ssh_keys:
           fingerprints:
-            - '7e:bc:59:e4:4f:a1:54:66:9d:17:b1:db:fe:da:0f:24'
+            - '2a:74:8c:f4:0a:f0:47:35:9a:de:a8:d8:52:70:84:18'
       - run: cd ~/repo/zq-blog && ls
       - run:
           name: Deploy Over SSH
