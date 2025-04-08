@@ -179,7 +179,7 @@ export default class extends Component {
           </IconButton>
 
           <IconButton
-            href={'https://zq.beaf.tech/'}
+            href={'https://zq-zone.beaf.tech/'}
             target={'_blank'}
             title={'个人介绍'}
           >
