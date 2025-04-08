@@ -47,7 +47,7 @@ export default ({}) => {
             <i className={'iconfont icon-github'} />
           </IconButton>
           <IconButton
-            href={`http://www.beian.miit.gov.cn`}
+            href={`https://beian.miit.gov.cn`}
             target={'_blank'}
             title={`ICP证`}
           >
