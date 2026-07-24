@@ -7,7 +7,6 @@
     "url": "https://github.com/JennerChen/zq-blog/issues"
   },
   "dependencies": {
-    "@cloudbase/js-sdk": "^3.6.3",
     "algoliasearch": "^4.8.5",
     "autosize": "^4.0.2",
     "babel-plugin-styled-components": "^2.1.4",
