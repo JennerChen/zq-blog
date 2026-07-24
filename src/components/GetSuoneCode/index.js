@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useCloudbase } from '../../cloudbase'
 import PhoneSelector from './PhoneSelector'
@@ -187,7 +187,7 @@ export default ({ accessToken }) => {
       })
   }
 
-  const getCode = async function(phone) {
+  const getCode = useCallback(async function(phone) {
     setGettingInfo(true)
 
     try {
@@ -205,9 +205,9 @@ export default ({ accessToken }) => {
     } finally {
       setGettingInfo(false)
     }
-  }
+  }, [])
 
-  const tapPhone = async phone => {
+  const tapPhone = useCallback(async phone => {
     const db = cloudbaseApp.database()
 
     const result = await db
@@ -235,7 +235,7 @@ export default ({ accessToken }) => {
     }
 
     localStorage.setItem('prevPhone', phone)
-  }
+  }, [])
 
   useEffect(() => {
     getBalance()
@@ -265,15 +265,7 @@ export default ({ accessToken }) => {
     }
   }, [cloudbaseApp])
 
-  if (error) {
-    return <ErrorMessage>{error}</ErrorMessage>
-  }
-
-  if (typeof balance === 'undefined') {
-    return <GlobalLoading />
-  }
-
-  const handlePhoneSelect = async phone => {
+  const handlePhoneSelect = useCallback(async phone => {
     setGettingInfo(true)
     try {
       const flag = await checkPhone(phone)
@@ -282,7 +274,7 @@ export default ({ accessToken }) => {
     } finally {
       setGettingInfo(false)
     }
-  }
+  }, [])
 
   const checkPhone = phone => {
     const requestOptions = {
@@ -323,7 +315,7 @@ export default ({ accessToken }) => {
       .catch(error => console.error(error))
   }
 
-  const handleOnMore = async () => {
+  const handleOnMore = useCallback(async () => {
     try {
       setGettingInfo(true)
       const nextPhone = await checkPhone('')
@@ -346,6 +338,14 @@ export default ({ accessToken }) => {
     } catch (e) {
       console.error(e)
     }
+  }, [])
+
+  if (error) {
+    return <ErrorMessage>{error}</ErrorMessage>
+  }
+
+  if (typeof balance === 'undefined') {
+    return <GlobalLoading />
   }
 
   return (

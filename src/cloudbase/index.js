@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 
 let app
 let user
@@ -39,15 +39,11 @@ export default getCloudbase
 export const useCloudbase = () => {
   const [_, forceRender] = useState(1)
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!app)
-      try {
-        await getCloudbase()
-
+      getCloudbase().then(() => {
         forceRender(v => v + 1)
-      } catch (e) {
-        console.log(e)
-      }
+      })
   }, [app])
 
   return app
