@@ -44,6 +44,8 @@ jobs:
 #            ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget --fix-missing
       # search index
       - run: echo ALGOLIA_APP_ID=$ALGOLIA_APP_ID "\n" ALGOLIA_API_KEY=$ALGOLIA_API_KEY "\n" ALGOLIA_SEARCH_API_KEY=$ALGOLIA_SEARCH_API_KEY "\n" ALGOLIA_INDEX_NAME=$ALGOLIA_INDEX_NAME "\n" > .env.algolia.production
+      # d1 access token inject
+      - run: echo D1_ACCESS_TOKEN=$D1_ACCESS_TOKEN "\n" > .env.d1.production
 
       - run: yarn run build
 

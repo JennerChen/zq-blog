@@ -7,6 +7,7 @@
     "url": "https://github.com/JennerChen/zq-blog/issues"
   },
   "dependencies": {
+    "@cloudbase/js-sdk": "^3.6.3",
     "algoliasearch": "^4.8.5",
     "autosize": "^4.0.2",
     "babel-plugin-styled-components": "^2.1.4",
@@ -60,7 +61,7 @@
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
-    "puppeteer": "^7.1.0"
+    "puppeteer": "^23.0.0"
   },
   "homepage": "https://zqblog.beaf.tech",
   "keywords": [
@@ -91,8 +92,5 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "config": {
-    "puppeteer_download_path": "./node_modules/puppeteer/.local-chromium"
   }
 }
