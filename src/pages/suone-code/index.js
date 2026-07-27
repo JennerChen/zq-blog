@@ -1,11 +1,10 @@
 import React from 'react'
-import { graphql, navigate } from 'gatsby'
+import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import GetSuoneCode from '../../components/GetSuoneCode'
 
 export default function SUONECode({
   data: {
-    allFile,
     site: { siteMetadata },
   },
 }) {

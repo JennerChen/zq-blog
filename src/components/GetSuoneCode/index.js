@@ -3,6 +3,11 @@ import styled, { keyframes } from 'styled-components'
 import { useCloudbase } from '../../cloudbase'
 import PhoneSelector from './PhoneSelector'
 import * as SUONE_API from '../../services/suone'
+import {
+  addPhoneToHistory,
+  getHistoryPhoneList,
+  removePhoneInPhoneList,
+} from '../../services/suone'
 
 const spin = keyframes`
   to {
@@ -199,8 +204,6 @@ const ResultBox = styled.div`
 export default ({ accessToken }) => {
   const [balance, setBalance] = useState()
 
-  const cloudbaseApp = useCloudbase()
-
   const [error, setError] = useState()
 
   const [phoneList, setPhoneList] = useState([])
@@ -256,32 +259,7 @@ export default ({ accessToken }) => {
   }, [])
 
   const tapPhone = useCallback(async phone => {
-    const db = cloudbaseApp.database()
-
-    const result = await db
-      .collection('phone_use_record')
-      .where({ phone, type: 'suone' })
-      .count()
-
-    if (result.total === 0) {
-      db.collection('phone_use_record').add({
-        phone,
-        timestamp: new Date().getTime(),
-        type: 'suone',
-      })
-    } else {
-      db.collection('phone_use_record')
-        .where({
-          phone,
-          type: 'suone',
-        })
-        .update({
-          phone,
-          timestamp: new Date().getTime(),
-          type: 'suone',
-        })
-    }
-
+    await SUONE_API.tapPhone(phone)
     localStorage.setItem('prevPhone', phone)
   }, [])
 
@@ -290,28 +268,19 @@ export default ({ accessToken }) => {
   }, [])
 
   useEffect(() => {
-    if (cloudbaseApp) {
-      const db = cloudbaseApp.database()
-      db.collection('suone_phone_list')
-        .doc('9d781d8a6a634ae8003e612919001827')
-        .get()
-        .then(doc => {
-          if (doc && doc.data && doc.data[0].phoneList) {
-            let pList = doc.data[0].phoneList
-            setPhoneList(pList)
+    SUONE_API.getHistoryPhoneList().then(pList => {
+      setPhoneList(pList)
 
-            const prevPhone = localStorage.getItem('prevPhone')
-            const prevPhoneIndex = pList.indexOf(prevPhone)
+      const prevPhone = localStorage.getItem('prevPhone')
+      const prevPhoneIndex = pList.indexOf(prevPhone)
 
-            if (prevPhone && prevPhoneIndex > -1) {
-              setTargetPhone(pList[prevPhoneIndex + 1] || pList[0])
-            } else {
-              setTargetPhone(pList[0])
-            }
-          }
-        })
-    }
-  }, [cloudbaseApp])
+      if (prevPhone && prevPhoneIndex > -1) {
+        setTargetPhone(pList[prevPhoneIndex + 1] || pList[0])
+      } else {
+        setTargetPhone(pList[0])
+      }
+    })
+  }, [])
 
   const handlePhoneSelect = useCallback(async phone => {
     setGettingInfo(true)
@@ -325,36 +294,15 @@ export default ({ accessToken }) => {
   }, [])
 
   const checkPhone = phone => {
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    }
-
-    let pPair = phone ? `&phone=${phone}` : ''
-
-    return fetch(
-      'https://api.d1jiema.com/zc/data.php?code=getPhone&token=' +
-        accessToken +
-        '&keyWord=SUONE' +
-        pPair,
-      requestOptions
-    )
-      .then(response => response.text())
+    return SUONE_API.getPhoneInfo(accessToken, phone)
       .then(result => {
-        console.log(result)
         if (result && result.startsWith('ERROR')) {
           if (phone) {
-            const db = cloudbaseApp.database()
-            const cleanPhoneList = phoneList.filter(p => p !== phone)
-
-            db.collection('suone_phone_list')
-              .doc('9d781d8a6a634ae8003e612919001827')
-              .update({
-                phoneList: cleanPhoneList,
-              })
-            setPhoneList(cleanPhoneList)
+            SUONE_API.removePhoneInPhoneList(phone).then(result => {
+              setPhoneList(result)
+            })
+            alert(`${phone} ${result}`)
           }
-          alert(`${phone} ${result}`)
           return false
         } else {
           return result
@@ -372,21 +320,13 @@ export default ({ accessToken }) => {
       if (nextPhone) {
         handlePhoneSelect(nextPhone)
 
-        if (!phoneList.includes(nextPhone)) {
-          const db = cloudbaseApp.database()
-          db.collection('suone_phone_list')
-            .doc('9d781d8a6a634ae8003e612919001827')
-            .update({
-              phoneList: [...phoneList, nextPhone],
-            })
-
-          setPhoneList([...phoneList, nextPhone])
-        }
+        const nextPhoneList = await SUONE_API.addPhoneToHistory(nextPhone)
+        setPhoneList(nextPhoneList)
       }
     } catch (e) {
       console.error(e)
     }
-  }, [])
+  }, [phoneList])
 
   if (error) {
     return <ErrorMessage>{error}</ErrorMessage>

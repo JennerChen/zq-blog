@@ -1,5 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import styled, { keyframes } from 'styled-components'
+import * as SUONE_API from '../../services/suone'
+import { getPhoneUseInfo } from '../../services/suone'
 
 const Field = styled.div`
   position: relative;
@@ -162,6 +164,10 @@ const SheetTitle = styled.li`
 `
 
 const Option = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   padding: 12px 16px;
   font-size: 16px;
   line-height: 1.5;
@@ -175,11 +181,33 @@ const Option = styled.li`
 
   @media (max-width: 768px) {
     padding: 14px 20px;
-    text-align: center;
+    justify-content: center;
   }
 `
 
+const OptionTime = styled.span`
+  flex: none;
+  color: #999;
+  font-size: 13px;
+`
+
 const normalize = item => (typeof item === 'string' ? item : item.phone)
+
+// 将上次查询的 timestamp 转为距现在的相对时间描述
+const formatTimeAgo = timestamp => {
+  const ts =
+    typeof timestamp === 'number' ? timestamp : new Date(timestamp).getTime()
+  if (!ts || Number.isNaN(ts)) return ''
+  const diff = Date.now() - ts
+  const minute = 60 * 1000
+  const hour = 60 * minute
+  const day = 24 * hour
+  if (diff < minute) return '刚刚'
+  if (diff < hour) return `${Math.floor(diff / minute)} 分钟前`
+  if (diff < day) return `${Math.floor(diff / hour)} 小时前`
+  if (diff < 30 * day) return `${Math.floor(diff / day)} 天前`
+  return new Date(ts).toLocaleDateString()
+}
 
 export default ({ phoneList, onSelect, selectedPhone, onMore }) => {
   // const [selectedPhone, setSelectedPhone] = useState('')
@@ -187,6 +215,7 @@ export default ({ phoneList, onSelect, selectedPhone, onMore }) => {
   const [copied, setCopied] = useState(false)
   const fieldRef = useRef(null)
   const copyTimerRef = useRef(null)
+  const [phoneUseRecordList, setRecordList] = useState([])
 
   useEffect(() => () => clearTimeout(copyTimerRef.current), [])
 
@@ -240,6 +269,21 @@ export default ({ phoneList, onSelect, selectedPhone, onMore }) => {
     }
   }
 
+  useEffect(() => {
+    if (phoneList && phoneList.length) {
+      SUONE_API.getPhoneUseInfo(selectedPhone).then(result => {
+        if (Array.isArray(result)) setRecordList(result)
+      })
+    }
+  }, [phoneList])
+
+  const dpPhoneList = useMemo(() => {
+    return phoneList.map(p => ({
+      phone: p,
+      useInfo: phoneUseRecordList.find(r => r.phone === p),
+    }))
+  }, [phoneList, phoneUseRecordList])
+
   return (
     <Field ref={fieldRef}>
       <FieldLabel htmlFor="suone-phone">手机号:</FieldLabel>
@@ -270,22 +314,25 @@ export default ({ phoneList, onSelect, selectedPhone, onMore }) => {
           <Overlay onClick={() => setOpen(false)} />
           <Panel>
             <SheetTitle>请选择手机号</SheetTitle>
-            {(phoneList || []).map(item => {
-              const phone = normalize(item)
+            <Option key={'more'} onClick={handleMore}>
+              更多
+            </Option>
+            {(dpPhoneList || []).map(item => {
+              const phone = normalize(item.phone)
+              const timeAgo = item.useInfo
+                ? formatTimeAgo(item.useInfo.timestamp)
+                : ''
               return (
                 <Option
                   key={phone}
                   $active={phone === selectedPhone}
                   onClick={() => handleSelect(phone)}
                 >
-                  {phone}
+                  <span>{phone}</span>
+                  {timeAgo && <OptionTime>{timeAgo}</OptionTime>}
                 </Option>
               )
             })}
-
-            <Option key={'more'} onClick={handleMore}>
-              更多
-            </Option>
           </Panel>
         </>
       )}
