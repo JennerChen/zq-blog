@@ -5,6 +5,8 @@ const commonFetchOptions = {
   redirect: 'follow',
 }
 
+const MSG_KEY_WORD = encodeURIComponent('苏州金昀商业')
+
 const request = url => {
   return fetch(url, commonFetchOptions).then(res => res.text())
 }
@@ -17,7 +19,8 @@ export const getBalance = async accessToken => {
 
 export const getCode = async (accessToken, phone) => {
   return await request(
-    `https://api.d1jiema.com/zc/data.php?code=getMsg&token=${accessToken}&phone=${phone}&keyWord=SUONE`
+    `https://api.d1jiema.com/zc/data.php?code=getMsg&token=${accessToken}&phone=${phone}&keyWord=` +
+      MSG_KEY_WORD
   )
 }
 
@@ -27,7 +30,8 @@ export const getPhoneInfo = async (accessToken, phone) => {
   return await request(
     'https://api.d1jiema.com/zc/data.php?code=getPhone&token=' +
       accessToken +
-      '&keyWord=SUONE' +
+      '&keyWord=' +
+      MSG_KEY_WORD +
       pPair
   )
 }
