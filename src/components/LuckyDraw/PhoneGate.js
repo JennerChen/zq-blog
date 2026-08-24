@@ -218,7 +218,7 @@ export default ({ mode, submitting, sending, error, onSendCode, onSubmit }) => {
 
       <Tip>
         {isSmsMode
-          ? '微信内需通过短信验证码确认手机号后才能参与抽奖'
+          ? '需通过短信验证码确认手机号后才能参与抽奖'
           : '仅活动名单内的手机号可以参与抽奖'}
       </Tip>
     </div>

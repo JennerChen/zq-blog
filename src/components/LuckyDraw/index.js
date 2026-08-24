@@ -226,12 +226,7 @@ export default () => {
       return
     }
 
-    if (!wechat) {
-      setStage('gate')
-      return
-    }
-
-    // 微信内已有短信登录态时直接复用, 跳过验证码步骤
+    // 所有环境均走短信验证, 已有登录态时直接复用, 跳过验证码步骤
     getLoggedInPhone()
       .then(loggedInPhone => {
         if (loggedInPhone && isValidPhone(loggedInPhone)) {
@@ -263,11 +258,6 @@ export default () => {
 
   const handleGateSubmit = useCallback(
     async ({ phone: inputPhone, code }) => {
-      if (!isWechat) {
-        checkEligibility(inputPhone, 'manual')
-        return
-      }
-
       const verification = verificationRef.current
 
       if (!verification) {
@@ -291,7 +281,7 @@ export default () => {
           isUser: verification.isUser,
         })
         setSubmitting(false)
-        checkEligibility(verifiedPhone, 'wechat-sms')
+        checkEligibility(verifiedPhone, isWechat ? 'wechat-sms' : 'sms')
       } catch (e) {
         console.error(e)
         setError('验证码错误或已过期, 请重新获取')
@@ -411,7 +401,7 @@ export default () => {
         <>
           {isExpired() && <Notice>活动已结束, 仅可查询历史抽奖结果</Notice>}
           <PhoneGate
-            mode={isWechat ? 'sms' : 'manual'}
+            mode="sms"
             sending={sending}
             submitting={submitting}
             error={error}
@@ -501,11 +491,7 @@ export default () => {
   }
 
   const showSignOut =
-    isWechat &&
-    phone &&
-    stage !== 'gate' &&
-    stage !== 'detecting' &&
-    stage !== 'expired'
+    phone && stage !== 'gate' && stage !== 'detecting' && stage !== 'expired'
 
   return (
     <Card>

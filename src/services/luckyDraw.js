@@ -153,7 +153,7 @@ export const loginWithSmsCode = async ({
   return loggedInPhone || phone
 }
 
-// 退出短信登录态, 微信内切换手机号时使用
+// 退出短信登录态, 切换手机号时使用
 export const signOutSmsLogin = async () => {
   const auth = await getAuth()
 
