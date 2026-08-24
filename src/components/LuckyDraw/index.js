@@ -17,6 +17,7 @@ import {
   maskPhone,
   saveRecord,
   sendSmsCode,
+  signOutSmsLogin,
 } from '../../services/luckyDraw'
 
 const Card = styled.div`
@@ -143,6 +144,34 @@ const Tip = styled.p`
   text-align: center;
 `
 
+// 微信内退出短信登录态的入口, 弱化样式避免干扰主流程
+const SignOutButton = styled.button`
+  display: block;
+  margin: 16px auto 0;
+  padding: 4px 8px;
+  color: #909399;
+  font-size: 13px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-decoration: underline;
+  -webkit-tap-highlight-color: transparent;
+
+  &:disabled {
+    color: #c0c4cc;
+    cursor: not-allowed;
+  }
+`
+
+const SignOutError = styled.p`
+  margin: 8px 0 0;
+  color: #d8000c;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+`
+
 const WHEEL_STAGES = ['ready', 'spinning', 'saving', 'result', 'saveFailed']
 
 export default () => {
@@ -155,6 +184,8 @@ export default () => {
   const [error, setError] = useState('')
   const [sending, setSending] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [signingOut, setSigningOut] = useState(false)
+  const [signOutError, setSignOutError] = useState('')
   const verificationRef = useRef(null)
   const resultRef = useRef(null)
 
@@ -311,6 +342,31 @@ export default () => {
     setStage('spinning')
   }
 
+  const handleSignOut = useCallback(async () => {
+    // 转盘动画与保存过程中不允许退出, 避免中途丢失当前手机号上下文
+    if (stage === 'spinning' || stage === 'saving' || signingOut) return
+
+    setSigningOut(true)
+    setSignOutError('')
+
+    try {
+      await signOutSmsLogin()
+
+      verificationRef.current = null
+      resultRef.current = null
+      setPhone('')
+      setRecord(null)
+      setTargetIndex(null)
+      setError('')
+      setStage('gate')
+    } catch (e) {
+      console.error(e)
+      setSignOutError('退出登录失败, 请重试')
+    } finally {
+      setSigningOut(false)
+    }
+  }, [stage, signingOut])
+
   const maskedPhone = phone
     ? maskPhone(phone)
     : (record && record.phoneMasked) || ''
@@ -444,10 +500,29 @@ export default () => {
     return null
   }
 
+  const showSignOut =
+    isWechat &&
+    phone &&
+    stage !== 'gate' &&
+    stage !== 'detecting' &&
+    stage !== 'expired'
+
   return (
     <Card>
       <Title>幸运抽奖</Title>
       {renderBody()}
+      {showSignOut && (
+        <>
+          <SignOutButton
+            type="button"
+            disabled={signingOut || stage === 'spinning' || stage === 'saving'}
+            onClick={handleSignOut}
+          >
+            {signingOut ? '正在退出...' : '退出短信登录(切换手机号)'}
+          </SignOutButton>
+          {signOutError && <SignOutError>{signOutError}</SignOutError>}
+        </>
+      )}
       {stage !== 'detecting' && !isExpired() && <Tip>{DEADLINE_TIP}</Tip>}
     </Card>
   )

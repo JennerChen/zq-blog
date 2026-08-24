@@ -16,7 +16,7 @@ const SALT = 'zqblog-lucky-draw-2026'
 
 // 测试白名单: 这里的手机号跳过 lucky_draw_whitelist 集合校验, 方便联调
 // TODO 上线前清空, 否则名单外的号码也能参与抽奖
-export const TEST_PHONES = ['18112525542']
+export const TEST_PHONES = []
 
 const WHITELIST_COLLECTION = 'lucky_draw_whitelist'
 const RECORD_COLLECTION = 'lucky_draw_record'
@@ -151,6 +151,16 @@ export const loginWithSmsCode = async ({
   const loggedInPhone = await getLoggedInPhone()
 
   return loggedInPhone || phone
+}
+
+// 退出短信登录态, 微信内切换手机号时使用
+export const signOutSmsLogin = async () => {
+  const auth = await getAuth()
+
+  await auth.signOut()
+
+  // 退出后退回匿名登录态, 保证后续名单/记录查询仍可正常调用
+  await auth.signInAnonymously({})
 }
 
 // 取登录态里的手机号, 匿名登录或未登录时返回空字符串
