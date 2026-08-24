@@ -12,7 +12,7 @@ export default function BigplanSuoneLuckDraw({
     <>
       <Helmet
         htmlAttributes={{ lang: 'cn' }}
-        title={`幸运抽奖 | ${siteMetadata.title}`}
+        title={`问卷幸运抽奖`}
         meta={[
           {
             name: 'description',
